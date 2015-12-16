@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">BookMe</string>
+    <string name="action_settings">Settings</string>
+    <string name="password">סיסמה</string>
+    <string name="nameUser">שם משתמש</string>
+    <string name="enter">הכנס</string>
+    <string name="no_user_information">עוד אין לי פרטי משתמש</string>
+    <string name="title_activity_client">ClientActivity</string>
+    <string name="title_activity_add">addActivity</string>
+    <string name="firstName">שם פרטי</string>
+    <string name="lastName">שם משפחה</string>
+    <string name="phone">טלפון</string>
+    <string name="address">כתובת</string>
+    <string name="sign_up">הרשם</string>
+    <string name="title_details">הכנסת פרטים:</string>
+    <string name="display_all_book">הצגת כל הספרים</string>
+    <string name="display_best_sell">הצגת הספרים הכי נמכרים</string>
+    <string name="display_best_rec">הצגת הספרים הכי מומלצים</string>
+    <string name="your_last_book">הספרים האחרונים שלך</string>
+    <string name="title_activity_all_book">AllBookActivity</string>
+</resources>

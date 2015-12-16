@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_client"
+    tools:context="com.example.naamashlomtzion.bookme.ClientActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/display_all_book"
+        android:id="@+id/bt_allBook"
+        android:longClickable="false"
+        android:minWidth="70dp"
+        android:textSize="30dp"
+        android:layout_marginTop="45dp"
+        android:width="500dp"
+        android:height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/display_best_sell"
+        android:id="@+id/bt_sellBook"
+        android:textSize="30dp"
+        android:width="500dp"
+        android:height="100dp"
+        android:layout_below="@+id/bt_allBook"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/display_best_rec"
+        android:id="@+id/bt_recoBook"
+        android:layout_marginTop="15dp"
+        android:textSize="30dp"
+        android:width="500dp"
+        android:height="100dp"
+        android:layout_below="@+id/bt_sellBook"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_last_book"
+        android:id="@+id/bt_lastBook"
+        android:textSize="30dp"
+        android:visibility="visible"
+        android:width="500dp"
+        android:height="100dp"
+        android:layout_below="@+id/bt_recoBook"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp" />
+</RelativeLayout>
