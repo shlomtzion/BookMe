@@ -1,5 +1,6 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -7,7 +8,7 @@ import java.util.Date;
 /**
  * Created by Naama & Shlomtzion
  */
-public class Book {
+public class Book implements Serializable{
 
     private long idBook;
     private String name;// name's book

@@ -11,8 +11,8 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -161,14 +161,14 @@ public class AllBookActivity extends Activity {
         }
     }*/
     Backend backend = BackendFactory.getInstance(this);
-    private GridView gridView;
+    private ListView listView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_book);
-        gridView = (GridView) findViewById(R.id.gv_allBook);
+        listView = (ListView) findViewById(R.id.listView);
 
         //Backend backend = BackendFactory.getInstance(this);
         final imageButtonAdapter adapter = new imageButtonAdapter();
@@ -189,15 +189,15 @@ public class AllBookActivity extends Activity {
 
             }
         });*/
-        gridView = (GridView) findViewById(R.id.gv_allBook);
+        listView = (ListView) findViewById(R.id.listView);
         try {
             //productListView.setAdapter(new ArrayAdapter<Product>(this,R.layout.row_button,backend.getProductList()));
-            gridView.setAdapter(adapter);
+            listView.setAdapter(adapter);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Book book = (Book)parent.getItemAtPosition(position);
@@ -234,6 +234,9 @@ public class AllBookActivity extends Activity {
         public imageButtonAdapter() {
             super();
             try {
+
+                //backend.setBooklist();
+                bookList = backend.getBookList();
                 DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
                 Book book = new Book("Harry Potter", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
                 Book book1 = new Book("Harry Potter1", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
@@ -243,8 +246,6 @@ public class AllBookActivity extends Activity {
                 bookList.add(book1);
                 bookList.add(book2);
                 bookList.add(book3);
-                //backend.setBooklist();
-                bookList = backend.getBookList();
 
             } catch (Exception e) {
                 e.printStackTrace();

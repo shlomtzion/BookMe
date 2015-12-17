@@ -1,5 +1,7 @@
 package Model.dataSource;
 
+import android.content.Context;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +20,13 @@ import entities.TypeBook;
  * Created by UserWin on 12/11/2015.
  */
 public class Databaselist implements Backend {
+
+    private Context context;
+
+    public Databaselist(Context current){
+        this.context = current;
+    }
+
     private ArrayList<Book>booklist = new ArrayList<Book>();
     private ArrayList<Client>clientlist = new ArrayList<Client>();
     private ArrayList<Provider>providerlist = new ArrayList<Provider>();

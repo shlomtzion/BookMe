@@ -1,13 +1,13 @@
 package com.example.naamashlomtzion.bookme;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class ClientActivity extends AppCompatActivity {
+public class ClientActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
