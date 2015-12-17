@@ -3,6 +3,7 @@ package Model.dataSource;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import Model.Backend.Backend;
 import entities.Book;
@@ -303,8 +304,8 @@ public class Databaselist implements Backend {
                 break;
             }
         }
-        invitationlist.add(new Invitation(idClient,idProvidr,idBook,count,price,false));
-        System.out.print(invitationlist);
+        invitationlist.add(new Invitation(idClient, idProvidr, idBook, count, price, false));
+       // System.out.print(invitationlist);
         /**
          * kan hishalah SMS la client odot pirte hahazmana
          */
@@ -316,17 +317,36 @@ public class Databaselist implements Backend {
         for(Book bookItem: booklist){
             if(bookItem.getId_book()==idBooK) {
                 bookItem.setCount(bookItem.getCount() - count);
+                bookItem.setCountSell(bookItem.getCount()+count);
                 return (bookItem.getPrice()*count);
             }
         }
         throw new Exception("the book is not found");
     }
     public void makingStars(long idBook, int number)throws Exception{}
+
+
     public ArrayList<Book> Bestsellers ()throws Exception{
+        if(booklist.size()==0)
+            throw new Exception("not have a book");
+
+
+
+
+
         return null;
     }
     public ArrayList<Book> RecommendedBooks() throws Exception{
-        return null;
+
+        ArrayList<Book>popolarBooks=booklist;
+        if(popolarBooks!=null) {
+
+            Collections.sort(popolarBooks, new Book());
+            return popolarBooks;
+        }
+        else
+            throw new Exception("רשימת הספרים ריקה");
+
     }
 
 
@@ -396,10 +416,10 @@ public class Databaselist implements Backend {
 
     public void setBooklist()throws Exception{
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        Book book = new Book("Harry Potter", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
-        Book book1 = new Book("Harry Potter1", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
-        Book book2 = new Book("Harry Potter2", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
-        Book book3 = new Book("Harry Potter3", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
+        Book book = new Book("Harry Potter", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70,20, TypeBook.ADULTS);
+        Book book1 = new Book("Harry Potter1", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70,15, TypeBook.ADULTS);
+        Book book2 = new Book("Harry Potter2", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70,10, TypeBook.ADULTS);
+        Book book3 = new Book("Harry Potter3", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70,23, TypeBook.ADULTS);
         booklist.add(book);
         booklist.add(book1);
         booklist.add(book2);

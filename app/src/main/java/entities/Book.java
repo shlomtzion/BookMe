@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.Comparator;
 import java.util.Date;
 
 
@@ -7,7 +8,7 @@ import java.util.Date;
 /**
  * Created by Naama & Shlomtzion
  */
-public class Book {
+public class Book implements Comparator<Book> {
 
     private long idBook;
     private String name;// name's book
@@ -16,29 +17,32 @@ public class Book {
     private Date publication;// date of publication for book
     private double price;//price's book
     private int count;// count the book in melai
+    private int countSell;
     private TypeBook typeBook;
-    private int makingStairs=0;//number of stars per book
+    private int makingStairs = 0;//number of stars per book
 
     public Book() {
-        this.idBook=0;
-        this.name="";
-        this.author="";
-        this.publisher="";
-        this.publication=null;
-        this.price=0;
-        this.count=0;
-        this.typeBook=null;
+        this.idBook = 0;
+        this.name = "";
+        this.author = "";
+        this.publisher = "";
+        this.publication = null;
+        this.price = 0;
+        this.count = 0;
+        this.countSell = 0;
+        this.typeBook = null;
         this.makingStairs = 0;
     }//defult constractor
 
-    public Book( String name, String author, String publisher, Date publication, double price, int count, TypeBook typeBook) {
-        this.idBook=0;
+    public Book(String name, String author, String publisher, Date publication, double price, int count, int countSell, TypeBook typeBook) {
+        this.idBook = 0;
         this.name = name;
         this.author = author;
         this.publisher = publisher;
         this.publication = publication;
         this.price = price;
         this.count = count;
+        this.countSell = countSell;
         this.typeBook = typeBook;
         this.makingStairs = 0;
     }
@@ -69,6 +73,14 @@ public class Book {
 
     public String getPublisher() {
         return publisher;
+    }
+
+    public int getCountSell() {
+        return countSell;
+    }
+
+    public void setCountSell(int countSell) {
+        this.countSell = countSell;
     }
 
     public void setPublisher(String publisher) {
@@ -125,9 +137,27 @@ public class Book {
                 ", publication=" + publication +
                 ", price=" + price +
                 ", count=" + count +
+                ",count of sell=" + countSell +
                 ", typeBook=" + typeBook +
                 ", number stars=" + makingStairs +
                 '}';
+    }
+
+    @Override
+    public int compare(Book o1, Book o2) {
+        if (o1.getMakingStairs() > o2.getMakingStairs())
+            return -1;
+        else if ((o1.getMakingStairs() < o2.getMakingStairs()))
+            return 1;
+        else return 0;//equel
+    }
+    public int compare2(Book o1, Book o2){
+        if (o1.getCountSell() > o2.getCountSell())
+            return -1;
+        else if ((o1.getCountSell() < o2.getCountSell()))
+            return 1;
+        else return 0;
+
     }
 
     @Override
@@ -141,10 +171,11 @@ public class Book {
 
     }
 
-        /*@Override
-        public int hashCode() {
-            return (int) (idBook ^ (idBook >>> 32));
-        }*/
-}
 
+
+    /*@Override
+    public int hashCode() {
+        return (int) (idBook ^ (idBook >>> 32));
+    }*/
+}
 
