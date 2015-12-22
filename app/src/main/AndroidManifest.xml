@@ -4,9 +4,7 @@
 
     <uses-permission android:name="android.permission.SEND_SMS" />
 
-    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -42,6 +40,11 @@
         <activity
             android:name=".InvitationBookActivity"
             android:label="@string/title_activity_invitation_book"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".ListBooksActivity"
+            android:label="@string/title_activity_list_books"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>

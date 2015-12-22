@@ -11,19 +11,15 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import Model.Backend.Backend;
 import Model.Backend.BackendFactory;
 import entities.Book;
-import entities.TypeBook;
 
 public class AllBookActivity extends Activity {
 
@@ -235,9 +231,11 @@ public class AllBookActivity extends Activity {
             super();
             try {
 
-                //backend.setBooklist();
+                backend.setBooklist();
+                ArrayList<Book> bookList = new ArrayList<Book>();
+
                 bookList = backend.getBookList();
-                DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+/*                DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
                 Book book = new Book("Harry Potter", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
                 Book book1 = new Book("Harry Potter1", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
                 Book book2 = new Book("Harry Potter2", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
@@ -245,13 +243,14 @@ public class AllBookActivity extends Activity {
                 bookList.add(book);
                 bookList.add(book1);
                 bookList.add(book2);
-                bookList.add(book3);
+                bookList.add(book3);*/
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         ArrayList<Book> bookList;
+
 
         @Override
         public Filter getFilter() {
@@ -261,7 +260,7 @@ public class AllBookActivity extends Activity {
                     try {
                         FilterResults fr = new FilterResults();
                         ArrayList<Book> filteredArray = new ArrayList<>();
-                        ArrayList<Book> bookList = backend.getBookList();
+                        //ArrayList<Book> bookList = backend.getBookList();
                         for (Book book : bookList) {
                             if (book.getName().contains(constraint) || constraint.length() == 0)
                                 filteredArray.add(book);
@@ -288,7 +287,8 @@ public class AllBookActivity extends Activity {
         @Override
         public int getCount() {
             try {
-                return bookList.size();
+                //return bookList.size();
+                return 1000;
             } catch (Exception e) {
                 e.printStackTrace();
                 return 0;
@@ -313,17 +313,21 @@ public class AllBookActivity extends Activity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             try {
+                if (convertView == null){
+
+                    convertView = View.inflate(AllBookActivity.this,R.layout.book_view,null);
+                }
                 //LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 //View row = inflater.inflate(R.layout.button_with_image, parent , false);
-                View row = getLayoutInflater().inflate(R.layout.book_view, parent , false);
-                TextView tv = (TextView) row.findViewById(R.id.text_cost_book);
-                ImageView iv = (ImageView) row.findViewById(R.id.imageBook);
-                iv.setImageResource(R.drawable.cake);
-                int imageID = getResources().getIdentifier("p_" + (position + 1),"drawable",getPackageName());
-                if (imageID != 0)
-                    iv.setImageResource(imageID);
+                //View row = inflater.inflate(R.layout.book_view, parent , false);
+                TextView tv = (TextView) convertView.findViewById(R.id.text_cost_book);
+                //ImageView iv = (ImageView) convertView.findViewById(R.id.imageBook);
+                //iv.setImageResource(R.drawable.cake);
+                //int imageID = getResources().getIdentifier("p_" + (position + 1),"drawable",getPackageName());
+                // (imageID != 0)
+                    //iv.setImageResource(imageID);
                 tv.setText(bookList.get(position).getName());
-                return row;
+                return convertView;
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;

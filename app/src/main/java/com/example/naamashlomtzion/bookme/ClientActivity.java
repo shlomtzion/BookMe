@@ -30,7 +30,7 @@ public class ClientActivity extends Activity {
         @Override
         public void onClick(View v) {
 
-            Intent intentAllBook = new Intent(ClientActivity.this, AllBookActivity.class);
+            Intent intentAllBook = new Intent(ClientActivity.this, ListBooksActivity.class);
             startActivity(intentAllBook);
 
         }

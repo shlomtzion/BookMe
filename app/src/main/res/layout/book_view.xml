@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/imageButton" />
+        android:layout_alignBottom="@+id/imageButton2" />
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -60,18 +60,12 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
-        android:layout_below="@+id/ratingBar"
-        android:layout_alignRight="@+id/ratingBar"
-        android:layout_alignEnd="@+id/ratingBar" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/imageButton2"
         android:src="@mipmap/ic_launcher"
-        android:layout_alignBottom="@+id/text_cost_book"
-        android:layout_alignLeft="@+id/text_nane_author"
-        android:layout_alignStart="@+id/text_nane_author" />
+        android:layout_below="@+id/ratingBar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/text_nane_author"
+        android:layout_alignEnd="@+id/text_nane_author" />
 
 </RelativeLayout>
