@@ -48,15 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
                 String str = backend.returnId(password.getText().toString());
                 Privileging privileging;
-                if (str.startsWith("c"))
-                    privileging = Privileging.CLIENT;
-                else {
-                    privileging = Privileging.PROVIDER;
-                }
                 long id;
-                String st = str.substring(1);
-                //System.out.println("id: "+st.toString());
-                Intent intentEnter;
+                String st;
+                if (str.startsWith("c")) {
+                    privileging = Privileging.CLIENT;
+                    st = str.substring(1);
+                    Intent intentEnter;
 
                     id = Long.parseLong(st);
                     Toast.makeText(getApplicationContext(),st,Toast.LENGTH_LONG).show();
@@ -65,6 +62,33 @@ public class MainActivity extends AppCompatActivity {
                     intentEnter = new Intent(MainActivity.this, ClientActivity.class);
                     intentEnter.putExtra("idClient", (Serializable) id);
                     startActivity(intentEnter);
+                }
+
+                else {
+                    privileging = Privileging.PROVIDER;
+                    st = str.substring(1);
+                    //new activity
+                    Intent intentEnterProvider;
+                    id = Long.parseLong(st);
+                    Toast.makeText(getApplicationContext(),st,Toast.LENGTH_LONG).show();
+                   // backend.findProvider(id,nameUser.getText().toString());
+                    intentEnterProvider = new Intent(MainActivity.this, ProviderActivity.class);
+                    intentEnterProvider.putExtra("idProvider", (Serializable) id);
+                    startActivity(intentEnterProvider);
+
+
+                }
+
+                //System.out.println("id: "+st.toString());
+               /* Intent intentEnter;
+
+                    id = Long.parseLong(st);
+                    Toast.makeText(getApplicationContext(),st,Toast.LENGTH_LONG).show();
+                    //throw new Exception("אחד מהנתונים שגוי, נסה שוב");
+                    //backend.findClient(id, nameUser.getText().toString());
+                    intentEnter = new Intent(MainActivity.this, ClientActivity.class);
+                    intentEnter.putExtra("idClient", (Serializable) id);
+                    startActivity(intentEnter);*/
 
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), password.getText().toString() + "------" +nameUser.getText().toString(), Toast.LENGTH_LONG).show();
