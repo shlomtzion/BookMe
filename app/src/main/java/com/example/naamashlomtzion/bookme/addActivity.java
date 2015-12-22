@@ -8,12 +8,15 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import Model.Backend.Backend;
 import Model.Backend.BackendFactory;
 import entities.Client;
+import entities.Privileging;
+import entities.Provider;
 
 //import  static android.Telephony.SMS_DELIVER;
 
@@ -28,6 +31,10 @@ public class addActivity extends Activity {
     EditText email ;
     String name;
     String password;
+    String type;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +50,24 @@ public class addActivity extends Activity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });}
+
+
+    public void onCheckboxClicked(View view) {//check box
+        boolean checked = ((CheckBox) view).isChecked();
+        switch (view.getId()) {
+            case R.id.checkBox:
+                if (checked) {
+                    type = "p";
+
+                } else {
+                    type = "c";
+                }
+                break;
+        }
+
+
+
 
         Button buttonsignUp = (Button) findViewById(R.id.bt_sign_up);
         buttonsignUp.setOnClickListener(new View.OnClickListener() {
@@ -51,31 +75,53 @@ public class addActivity extends Activity {
             public void onClick(View v) {
 
                firstName = (EditText) findViewById(R.id.Text_firstName);
-                lastName = (EditText) findViewById(R.id.Text_lastName);
-                 phone = (EditText) findViewById(R.id.TextPone);
-                 address = (EditText) findViewById(R.id.Text_address);
-                 email = (EditText) findViewById(R.id.Text_email);
-                //provider
-                //addprovider
-                name=firstName.getText().toString()+ "_"+lastName.getText().toString();
-                Client client = new Client();
-                client.setName(name);
-                client.setPhone(phone.getText().toString());
-                client.setAddress(address.getText().toString());
-                client.setEmail(email.getText().toString());
-                try {
-                    password = backend.addClient(client);
-                    sendSms();
+               lastName = (EditText) findViewById(R.id.Text_lastName);
+                phone = (EditText) findViewById(R.id.TextPone);
+                address = (EditText) findViewById(R.id.Text_address);
+                email = (EditText) findViewById(R.id.Text_email);
 
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(),
-                            "טעות", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
+                if (type=="p"){
+                  name=firstName.getText().toString()+ "_"+lastName.getText().toString();
+                   Provider provider = new Provider();
+                   provider.setName(name);
+                   provider.setPhone(phone.getText().toString());
+                    provider.setAddress(address.getText().toString());
+                   try {
+                        password = backend.addProvider(provider, Privileging.CEO);
+                        sendSms();
+
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(),
+                                "טעות", Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                            }
+
                 }
 
-            }
-        });
-    }
+                        // Put some meat on the sandwich
+                else{
+                    name=firstName.getText().toString()+ "_"+lastName.getText().toString();
+                    Client client = new Client();
+                    client.setName(name);
+                    client.setPhone(phone.getText().toString());
+                    client.setAddress(address.getText().toString());
+                    client.setEmail(email.getText().toString());
+                    try {
+                        password = backend.addClient(client);
+                        sendSms();
+
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(),
+                                "טעות", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                    }
+ }
+
+
+            });
+        }
+
     private void sendSms() {
         String number = phone.getText().toString();
         String massage = firstName.getText().toString()+" hallo, your user name: " + name + " your password : "+password;

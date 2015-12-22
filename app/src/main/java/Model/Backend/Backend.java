@@ -22,7 +22,7 @@ public interface Backend {
      * @param privileging
      * @throws Exception
      */
-    public void addProvider(Provider provider, Privileging privileging)throws Exception;
+    public String addProvider(Provider provider, Privileging privileging)throws Exception;
 
     /**
      * add client to database. (only ceo)

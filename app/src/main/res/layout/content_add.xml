@@ -70,6 +70,7 @@
         android:layout_below="@+id/Text_email"
         android:layout_alignLeft="@+id/Text_email"
         android:layout_alignStart="@+id/Text_email"
+        android:onClick="onCheckboxClicked"/>
         android:checked="false" />
 
     <Button

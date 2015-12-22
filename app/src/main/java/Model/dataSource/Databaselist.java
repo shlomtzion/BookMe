@@ -46,7 +46,7 @@ public class Databaselist implements Backend {
     }
 
     @Override
-    public void addProvider(Provider provider, Privileging privileging)throws Exception{
+    public String addProvider(Provider provider, Privileging privileging)throws Exception{
         if(privileging == Privileging.CEO) {
             if(providerlist.size()!=0)
             {
@@ -55,8 +55,10 @@ public class Databaselist implements Backend {
                 throw new Exception("The provider has a list. ");
             }
             }
-                provider.setId_provider(++providerCounter);
-                providerlist.add(provider);
+            provider.setId_provider(++providerCounter);
+            String pass = doingPassword(provider.getId_provider (),Privileging.PROVIDER);
+            providerlist.add(provider);
+            return  pass;
 
         }
         else throw new Exception("only the CEO can add provider");
