@@ -25,7 +25,7 @@ public class ListBooksActivity extends Activity {
     //private long msTime;
     //private List<String> myList;
 
-/*    private void initList(int size)
+/*   private void initList(int size)
     {
         myList = new ArrayList<String>();
 
@@ -65,7 +65,7 @@ public class ListBooksActivity extends Activity {
     private List<Book> myItemList;
 
    void initItemList(int size) {
-        myItemList = new ArrayList<Book>();
+        myItemList = new ArrayList<>();
 
 /*        for (int i = 0; i < size; i++)
         {
