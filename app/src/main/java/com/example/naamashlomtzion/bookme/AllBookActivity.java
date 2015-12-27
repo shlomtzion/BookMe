@@ -12,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -320,13 +319,13 @@ public class AllBookActivity extends Activity {
                 //LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 //View row = inflater.inflate(R.layout.button_with_image, parent , false);
                 //View row = inflater.inflate(R.layout.book_view, parent , false);
-                TextView tv = (TextView) convertView.findViewById(R.id.text_cost_book);
+                //TextView tv = (TextView) convertView.findViewById(R.id.text_cost_book);
                 //ImageView iv = (ImageView) convertView.findViewById(R.id.imageBook);
                 //iv.setImageResource(R.drawable.cake);
                 //int imageID = getResources().getIdentifier("p_" + (position + 1),"drawable",getPackageName());
                 // (imageID != 0)
                     //iv.setImageResource(imageID);
-                tv.setText(bookList.get(position).getName());
+               // tv.setText(bookList.get(position).getName());
                 return convertView;
             } catch (Exception e) {
                 e.printStackTrace();

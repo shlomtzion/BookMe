@@ -1,71 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageBook"
-        android:src="@drawable/cake1"
-        android:adjustViewBounds="true"
-        android:maxWidth="200dp"
-        android:maxHeight="200dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/imageButton2" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:weightSum="1">
 
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ratingBar"
-        android:numStars="5"
-        android:layout_below="@+id/text_nane_author"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <ImageView
+            android:layout_width="57dp"
+            android:layout_height="60dp"
+            android:id="@+id/imageBook"
+            android:src="@drawable/cake1"
+            android:maxWidth="100dp"
+            android:maxHeight="100dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="שם הספר"
-        android:id="@+id/text_name_book"
-        android:textSize="30sp"
-        android:layout_marginTop="0sp"
-        android:layout_toLeftOf="@+id/imageBook"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="שם הסופר"
+            android:id="@+id/text_nane_author"
+            android:layout_below="@+id/text_name_book"
+            android:textSize="15dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="שם הסופר"
-        android:id="@+id/text_nane_author"
-        android:layout_toLeftOf="@+id/imageBook"
-        android:layout_below="@+id/text_name_book"
-        android:textSize="30sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="שם הספר"
+            android:id="@+id/text_name_book"
+            android:layout_marginTop="0sp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="15dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="מחיר הספר"
-        android:id="@+id/text_cost_book"
-        android:textSize="30sp"
-        android:layout_below="@+id/imageBook"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="22dp" >
+        <RatingBar
+            android:layout_width="222dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            android:numStars="5"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="מחיר הספר"
+            android:id="@+id/text_cost_book"
+            android:textSize="15dp" />
+    </LinearLayout>
+
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="46dp"
+        android:layout_height="43dp"
         android:id="@+id/imageButton2"
         android:src="@mipmap/ic_launcher"
         android:layout_below="@+id/ratingBar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/text_nane_author"
-        android:layout_alignEnd="@+id/text_nane_author" />
+        android:layout_alignEnd="@+id/text_nane_author"
+        android:layout_gravity="center_horizontal" />
 
-</RelativeLayout>
+</LinearLayout>

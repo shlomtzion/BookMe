@@ -1,13 +1,9 @@
 package entities;
 
-import java.io.Serializable;
-
-
-
 /**
  * Created by Naama & Shlomtzion
  */
-public class Book implements Serializable{
+public class Book {
 
     private long idBook;
     private String name;// name's book
