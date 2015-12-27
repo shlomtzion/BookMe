@@ -3,6 +3,12 @@
     package="com.example.naamashlomtzion.bookme" >
 
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permissiom android:name="android.permission.INTERNET" />
+
+    <uses-permissiom android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permissiom android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permissiom android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 
 
 

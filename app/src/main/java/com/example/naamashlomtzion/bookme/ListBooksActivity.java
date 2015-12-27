@@ -11,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,10 +57,7 @@ public class ListBooksActivity extends Activity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
             {
-                //if (convertView == null) {
-                //    convertView = View.inflate(ListBooksActivity.this, R.layout.row_item,null);}
-                //convertView = View.inflate(ListBooksActivity.this,
-                 //       R.layout.row_book,null);
+
                 if (convertView == null)
                 {
                     convertView = View.inflate(ListBooksActivity.this,
@@ -79,8 +77,8 @@ public class ListBooksActivity extends Activity {
                 TextView productNameAuthorTextView = (TextView) convertView
                         .findViewById(R.id.text_nane_author);
 
-                //TextView productCostTextView = (TextView) convertView
-                     //   .findViewById(R.id.text_cost_book);
+                TextView productCostTextView = (TextView) convertView
+                        .findViewById(R.id.text_cost_book);
 
                 //image button
                 ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton2);
@@ -92,8 +90,9 @@ public class ListBooksActivity extends Activity {
                      //   .getId()).toString());
                 productNameTextView.setText(myItemList.get(position).getName());
                 productNameAuthorTextView.setText(myItemList.get(position).getAuthor());
-                //productCostTextView.setText((int) myItemList.get(position).getPrice());
-                //productCostTextView.setText(((int) myItemList.get(position).getPrice()));
+
+                NumberFormat nm = NumberFormat.getNumberInstance();
+                productCostTextView.setText(nm.format(myItemList.get(position).getPrice()));
 
                // iv.setImageResource(R.drawable.cake);
                // ratingBar.setNumStars(4);

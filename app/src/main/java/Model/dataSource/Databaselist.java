@@ -403,10 +403,10 @@ public class Databaselist implements Backend {
 
     public void setBooklist()throws Exception{
         //DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        Book book = new Book("Harry Potter", "rol", "asdfghj", "02/12/1993", 45, 70, TypeBook.ADULTS);
-        Book book1 = new Book("Harry Potter1", "rol", "asdfghj", "02/12/1993", 45, 70, TypeBook.ADULTS);
-        Book book2 = new Book("Harry Potter2", "rol", "asdfghj", "02/12/1993", 45, 70, TypeBook.ADULTS);
-        Book book3 = new Book("Harry Potter3", "rol", "asdfghj", "02/12/1993", 45, 70, TypeBook.ADULTS);
+        Book book = new Book("הארי פוטר 2", "רולינג", "asdfghj", "02/12/1993", 45, 70, TypeBook.ADULTS);
+        Book book1 = new Book("הארי פוטר 3", "רולינג", "asdfghj", "02/12/1993", 45, 70, TypeBook.ADULTS);
+        Book book2 = new Book("הארי פוטר 4", "רולינג", "asdfghj", "02/12/1993", 45, 70, TypeBook.ADULTS);
+        Book book3 = new Book("הארי פוטר 5", "רולינג", "asdfghj", "02/12/1993", 45, 70, TypeBook.ADULTS);
         booklist.add(book);
         booklist.add(book1);
         booklist.add(book2);
