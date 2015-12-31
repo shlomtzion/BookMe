@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     privileging = Privileging.PROVIDER;
                     st = str.substring(1);
-                    //new activity
                     Intent intentEnterProvider;
                     id = Long.parseLong(st);
                     Toast.makeText(getApplicationContext(),st,Toast.LENGTH_LONG).show();

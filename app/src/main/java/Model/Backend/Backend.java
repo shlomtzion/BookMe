@@ -8,13 +8,14 @@ package Model.Backend;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 import entities.*;
 
 
 public interface Backend {
 
-    public void addBook(Book book, Privileging privileging)throws Exception;
+    public long addBook(Book book, Privileging privileging)throws Exception;
 
     /**
      * add provider to database. (only ceo can do it).
@@ -110,6 +111,8 @@ public interface Backend {
     public String returnId(String password);
 
     public void setBooklist()throws Exception;
+    public List<String> nameBook()throws Exception;
+    public Book returnBookFromId(long idBook)throws Exception;
 
 
 }

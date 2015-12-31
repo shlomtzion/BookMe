@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import Model.Backend.Backend;
 import entities.Book;
@@ -31,7 +32,7 @@ public class Databaselist implements Backend {
     private int providerCounter=0;
 
     @Override
-    public void addBook(Book book, Privileging privileging)throws Exception{
+    public long addBook(Book book, Privileging privileging)throws Exception{
         if(privileging == Privileging.CLIENT)
             throw new Exception("Client can not add a book");
         if(booklist.size()!=0) {
@@ -42,6 +43,7 @@ public class Databaselist implements Backend {
         }
         book.setId_book(++bookCounter);
         booklist.add(book);
+        return book.getId_book();
 
     }
 
@@ -191,9 +193,11 @@ public class Databaselist implements Backend {
     public void updateBook(Book book, long idProvider, Privileging privileging) throws Exception {
         if(privileging==Privileging.CLIENT)
             throw new Exception("Client can not update a book");
-        if(privileging==Privileging.PROVIDER){
-            if(ifProviderBook(book.getId_book(),idProvider)==false)
-                throw new Exception("book does not belong to provider!");
+            if(privileging==Privileging.PROVIDER){
+
+                if(ifProviderBook(book.getId_book(),idProvider)==false)
+                    throw new Exception("book does not belong to provider!");
+
         }
         for (Book bookItem : booklist) {
             if (bookItem.getId_book() == book.getId_book()) {
@@ -208,6 +212,27 @@ public class Databaselist implements Backend {
             }
         }
         throw new Exception("The book is not found");
+
+    }
+    public List<String>nameBook()throws Exception{
+        List<String> nameOfBook=new ArrayList<String>();
+        String name;
+        if(booklist!=null){
+            for (Book bookItem : booklist) {
+                name=bookItem.getName()+" id:"+bookItem.getId_book();
+                nameOfBook.add(name);
+                name="";
+                }
+            return nameOfBook;
+        }
+        throw new Exception("The list of book is ampety. ");
+
+    }
+    public Book returnBookFromId(long idBook)throws Exception{
+        for (Book bookItem : booklist) {
+            if (bookItem.getId_book() == idBook) {
+                return bookItem;}}
+        throw new Exception("the book not found");
 
     }
 

@@ -19,4 +19,16 @@
     <string name="your_last_book">הספרים האחרונים שלך</string>
     <string name="title_activity_all_book">AllBookActivity</string>
     <string name="title_activity_provider">ProviderActivity</string>
+    <string name="privet_text">ברוך הבא ספק</string>
+    <string name="closedrawer">סגור</string>
+    <string name="opendrawer">פתוח</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="addBookP">הוספת ספר</string>
+    <string name="deleteBookP">מחיקת ספר</string>
+    <string name="updateBookP">עידכון ספר</string>
+    <string name="listBookP">הספרים שלי</string>
+
+
 </resources>
