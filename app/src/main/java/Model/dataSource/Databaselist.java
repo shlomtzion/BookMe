@@ -292,10 +292,10 @@ public class Databaselist implements Backend {
             return providerlist;
         else throw new Exception("The providers list is empty");
     }
-    public void addInvitation(long idBook, Long idClient, int count, boolean delivery)throws Exception{
-        double price=toBuy(idBook,count);
-        if(delivery)
-            price=price+30;//Delivery costs 30
+    public void addInvitation(long idBook, long idClient, int count,double totalPrice, boolean delivery)throws Exception{
+        //toBuy(idBook,count,delivery,double );
+        //if(delivery)
+           // price=price+30;//Delivery costs 30
         long idProvidr = 0;
         for (Book_Provider bookProvider: book_providerlist){
             if(bookProvider.getIdBook()==idBook){
@@ -303,20 +303,23 @@ public class Databaselist implements Backend {
                 break;
             }
         }
-        invitationlist.add(new Invitation(idClient,idProvidr,idBook,count,price,false));
-        System.out.print(invitationlist);
+        invitationlist.add(new Invitation(idClient, idProvidr, idBook, count,totalPrice, delivery));
+        //System.out.print(invitationlist);
         /**
          * kan hishalah SMS la client odot pirte hahazmana
          */
     }
 
-    public double toBuy(long idBooK, int count)throws Exception{
+    public double toBuy(long idBooK, int count, boolean delivery)throws Exception{
         if(booklist.size()==0)
             throw new Exception("the book is not found");
         for(Book bookItem: booklist){
             if(bookItem.getId_book()==idBooK) {
                 bookItem.setCount(bookItem.getCount() - count);
-                return (bookItem.getPrice()*count);
+                double price = (bookItem.getPrice()*count);
+                if (delivery)
+                    price += 30;//Delivery costs 30
+                return price;
             }
         }
         throw new Exception("the book is not found");

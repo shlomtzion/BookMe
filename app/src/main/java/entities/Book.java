@@ -1,9 +1,5 @@
 package entities;
 
-import java.util.Date;
-
-
-
 /**
  * Created by Naama & Shlomtzion
  */
@@ -13,7 +9,7 @@ public class Book {
     private String name;// name's book
     private String author;// name's author for book
     private String publisher; //name's publisher
-    private Date publication;// date of publication for book
+    private String publication;// date of publication for book
     private double price;//price's book
     private int count;// count the book in melai
     private TypeBook typeBook;
@@ -31,7 +27,7 @@ public class Book {
         this.makingStairs = 0;
     }//defult constractor
 
-    public Book( String name, String author, String publisher, Date publication, double price, int count, TypeBook typeBook) {
+    public Book( String name, String author, String publisher, String publication, double price, int count, TypeBook typeBook) {
         this.idBook=0;
         this.name = name;
         this.author = author;
@@ -75,11 +71,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Date getPublication() {
+    public String getPublication() {
         return publication;
     }
 
-    public void setPublication(Date publication) {
+    public void setPublication(String publication) {
         this.publication = publication;
     }
 
