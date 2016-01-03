@@ -28,7 +28,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_user_information"
+        android:text="אין לי פרטי משתמש"
         android:id="@+id/bt_add"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

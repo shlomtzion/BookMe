@@ -75,9 +75,9 @@ public interface Backend {
      * @return
      * @throws Exception
      */
-    public double toBuy(long idBooK, int count)throws Exception;
+    public double toBuy(long idBooK, int count, boolean delivery)throws Exception;
 
-    public void addInvitation(long idBook, Long idClient, int count, boolean delivery)throws Exception;
+    public void addInvitation(long idBook, long idClient, int count,double totalPrice, boolean delivery)throws Exception;
 
     /**
      * add star to book)

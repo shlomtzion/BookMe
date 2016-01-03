@@ -1,9 +1,11 @@
 package entities;
 
+import java.io.Serializable;
+
 /**
  * Created by Naama & Shlomtzion
  */
-public class Book {
+public class Book implements Serializable{
 
     private long idBook;
     private String name;// name's book

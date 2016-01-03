@@ -52,14 +52,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_launcher"
+            android:clickable="true" />
 
         <RatingBar
-            android:layout_width="250dp"
+            android:layout_width="238dp"
             android:layout_height="wrap_content"
-            android:id="@+id/ratingBar2"
+            android:id="@+id/ratingBar"
             android:numStars="5"
-            android:stepSize="1.0" />
+            android:rating="2" />
 
     </LinearLayout>
 
