@@ -2,12 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.naamashlomtzion.bookme" >
 
+
     <uses-permission android:name="android.permission.SEND_SMS" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-pinermission  android:name="android.permission.INTERNAT"/>
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -38,11 +39,6 @@
         <activity
             android:name=".AllBookActivity"
             android:label="@string/title_activity_all_book"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".ProviderActivity"
-            android:label="@string/title_activity_provider"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>

@@ -3,8 +3,6 @@ package Model.dataSource;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import Model.Backend.Backend;
 import entities.Book;
@@ -32,7 +30,7 @@ public class Databaselist implements Backend {
     private int providerCounter=0;
 
     @Override
-    public long addBook(Book book, Privileging privileging)throws Exception{
+    public void addBook(Book book, Privileging privileging)throws Exception{
         if(privileging == Privileging.CLIENT)
             throw new Exception("Client can not add a book");
         if(booklist.size()!=0) {
@@ -43,12 +41,11 @@ public class Databaselist implements Backend {
         }
         book.setId_book(++bookCounter);
         booklist.add(book);
-        return book.getId_book();
 
     }
 
     @Override
-    public String addProvider(Provider provider, Privileging privileging)throws Exception{
+    public void addProvider(Provider provider, Privileging privileging)throws Exception{
         if(privileging == Privileging.CEO) {
             if(providerlist.size()!=0)
             {
@@ -57,10 +54,8 @@ public class Databaselist implements Backend {
                 throw new Exception("The provider has a list. ");
             }
             }
-            provider.setId_provider(++providerCounter);
-            String pass = doingPassword(provider.getId_provider (),Privileging.PROVIDER);
-            providerlist.add(provider);
-            return  pass;
+                provider.setId_provider(++providerCounter);
+                providerlist.add(provider);
 
         }
         else throw new Exception("only the CEO can add provider");
@@ -193,11 +188,9 @@ public class Databaselist implements Backend {
     public void updateBook(Book book, long idProvider, Privileging privileging) throws Exception {
         if(privileging==Privileging.CLIENT)
             throw new Exception("Client can not update a book");
-            if(privileging==Privileging.PROVIDER){
-
-                if(ifProviderBook(book.getId_book(),idProvider)==false)
-                    throw new Exception("book does not belong to provider!");
-
+        if(privileging==Privileging.PROVIDER){
+            if(ifProviderBook(book.getId_book(),idProvider)==false)
+                throw new Exception("book does not belong to provider!");
         }
         for (Book bookItem : booklist) {
             if (bookItem.getId_book() == book.getId_book()) {
@@ -212,27 +205,6 @@ public class Databaselist implements Backend {
             }
         }
         throw new Exception("The book is not found");
-
-    }
-    public List<String>nameBook()throws Exception{
-        List<String> nameOfBook=new ArrayList<String>();
-        String name;
-        if(booklist!=null){
-            for (Book bookItem : booklist) {
-                name=bookItem.getName()+" id:"+bookItem.getId_book();
-                nameOfBook.add(name);
-                name="";
-                }
-            return nameOfBook;
-        }
-        throw new Exception("The list of book is ampety. ");
-
-    }
-    public Book returnBookFromId(long idBook)throws Exception{
-        for (Book bookItem : booklist) {
-            if (bookItem.getId_book() == idBook) {
-                return bookItem;}}
-        throw new Exception("the book not found");
 
     }
 
@@ -331,8 +303,8 @@ public class Databaselist implements Backend {
                 break;
             }
         }
-        invitationlist.add(new Invitation(idClient, idProvidr, idBook, count, price, false));
-       // System.out.print(invitationlist);
+        invitationlist.add(new Invitation(idClient,idProvidr,idBook,count,price,false));
+        System.out.print(invitationlist);
         /**
          * kan hishalah SMS la client odot pirte hahazmana
          */
@@ -344,36 +316,17 @@ public class Databaselist implements Backend {
         for(Book bookItem: booklist){
             if(bookItem.getId_book()==idBooK) {
                 bookItem.setCount(bookItem.getCount() - count);
-                bookItem.setCountSell(bookItem.getCount()+count);
                 return (bookItem.getPrice()*count);
             }
         }
         throw new Exception("the book is not found");
     }
     public void makingStars(long idBook, int number)throws Exception{}
-
-
     public ArrayList<Book> Bestsellers ()throws Exception{
-        if(booklist.size()==0)
-            throw new Exception("not have a book");
-
-
-
-
-
         return null;
     }
     public ArrayList<Book> RecommendedBooks() throws Exception{
-
-        ArrayList<Book>popolarBooks=booklist;
-        if(popolarBooks!=null) {
-
-            Collections.sort(popolarBooks, new Book());
-            return popolarBooks;
-        }
-        else
-            throw new Exception("רשימת הספרים ריקה");
-
+        return null;
     }
 
 
@@ -443,10 +396,10 @@ public class Databaselist implements Backend {
 
     public void setBooklist()throws Exception{
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        Book book = new Book("Harry Potter", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70,20, TypeBook.ADULTS);
-        Book book1 = new Book("Harry Potter1", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70,15, TypeBook.ADULTS);
-        Book book2 = new Book("Harry Potter2", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70,10, TypeBook.ADULTS);
-        Book book3 = new Book("Harry Potter3", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70,23, TypeBook.ADULTS);
+        Book book = new Book("Harry Potter", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
+        Book book1 = new Book("Harry Potter1", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
+        Book book2 = new Book("Harry Potter2", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
+        Book book3 = new Book("Harry Potter3", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
         booklist.add(book);
         booklist.add(book1);
         booklist.add(book2);

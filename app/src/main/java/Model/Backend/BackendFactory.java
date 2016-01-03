@@ -12,7 +12,8 @@ public final class BackendFactory {
         public static String mode = "lists";
         public final static Backend getInstance(Context context) {
             if (mode == "lists") {
-                if (instance == null) instance = new Model.dataSource.Databaselist();
+                if (instance == null)
+                    instance = new Model.dataSource.Databaselist(context);
                 return instance;
             }
             /*if (mode == "sql") {
