@@ -20,4 +20,25 @@
     <string name="title_activity_all_book">AllBookActivity</string>
     <string name="title_activity_invitation_book">InvitationBookActivity</string>
     <string name="title_activity_list_books">ListBooksActivity</string>
+    <string name="name_book">שם הספר</string>
+    <string name="delete_book">מחיקת ספר</string>
+    <string name="add_BookP">הוספת ספר</string>
+    <string name="updateBookP">עידכון ספר</string>
+    <string name="pref_title_sync_frequency">רשימת מעודפים</string>
+    <string name="pref_title_system_sync_settings">הכנסת פרטים</string>
+    <string name="pref_title_social_recommendations">רשימת הספרים הפופלארים</string>
+    <string name="pref_description_social_recommendations">סיכום הפרטים</string>
+    <string name="pref_title_display_name">הצגת שם</string>
+    <string name="pref_default_display_name">שם ברירת מחדל</string>
+    <string name="pref_title_add_friends_to_messages">רשימת החברים</string>
+    <string name="pref_header_general">הדר כללי</string>
+    <string name="pref_header_notifications">הדר משני</string>
+    <string name="pref_header_data_sync">הדר מידע</string>
+    <string name="pref_title_new_message_notifications">הודעה חדשה</string>
+    <string name="pref_title_ringtone">צלצול טלפון</string>
+    <string name="pref_title_vibrate">החלפת וורב</string>
+    <string name="closedrawer">סגירה </string>
+    <string name="opendrawer">פתיחה</string>
+
+
 </resources>

@@ -44,10 +44,12 @@
         android:layout_alignRight="@+id/count_editText"
         android:layout_alignEnd="@+id/count_editText"
         android:layout_marginTop="45dp"
-        android:layout_toEndOf="@+id/nameBook_textView"
         android:textSize="30dp"
         android:layout_alignLeft="@+id/nameBook_textView"
         android:layout_alignStart="@+id/nameBook_textView" />
+
+       <!--- android:layout_toEndOf="@+id/nameBook_textView"-->
+
 
     <EditText
         android:layout_width="wrap_content"

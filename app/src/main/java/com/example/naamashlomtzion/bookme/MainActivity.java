@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     //throw new Exception("אחד מהנתונים שגוי, נסה שוב");
                     //backend.findClient(id, nameUser.getText().toString());
                     intentEnter = new Intent(MainActivity.this, ClientActivity.class);
-                    intentEnter.putExtra("idClient", (Serializable) id);
+                    intentEnter.putExtra("idClient", id);
                     startActivity(intentEnter);
                 }
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),st,Toast.LENGTH_LONG).show();
                    // backend.findProvider(id,nameUser.getText().toString());
                     intentEnterProvider = new Intent(MainActivity.this, ProviderActivity.class);
-                    intentEnterProvider.putExtra("idProvider", (Serializable) id);
+                    intentEnterProvider.putExtra("idProvider",  id);
                     startActivity(intentEnterProvider);
 
 

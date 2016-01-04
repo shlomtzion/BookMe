@@ -1,8 +1,11 @@
 package Model.dataSource;
 
+import android.content.Context;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import Model.Backend.Backend;
 import entities.Book;
@@ -18,6 +21,9 @@ import entities.TypeBook;
  * Created by UserWin on 12/11/2015.
  */
 public class Databaselist implements Backend {
+    private Context context;
+    public  Databaselist(Context current){this.context=current;}
+
     private ArrayList<Book>booklist = new ArrayList<Book>();
     private ArrayList<Client>clientlist = new ArrayList<Client>();
     private ArrayList<Provider>providerlist = new ArrayList<Provider>();
@@ -30,32 +36,35 @@ public class Databaselist implements Backend {
     private int providerCounter=0;
 
     @Override
-    public void addBook(Book book, Privileging privileging)throws Exception{
+    public long addBook(Book book, Privileging privileging)throws Exception{
         if(privileging == Privileging.CLIENT)
             throw new Exception("Client can not add a book");
         if(booklist.size()!=0) {
             for (Book bookItem : booklist) {
                 if (bookItem.equals(book))
-                throw new Exception("The book has a list. ");
+                    throw new Exception("The book has a list. ");
             }
         }
         book.setId_book(++bookCounter);
         booklist.add(book);
+        return book.getId_book();
 
     }
 
     @Override
-    public void addProvider(Provider provider, Privileging privileging)throws Exception{
+    public String addProvider(Provider provider, Privileging privileging)throws Exception{
         if(privileging == Privileging.CEO) {
             if(providerlist.size()!=0)
             {
-            for (Provider providerItem : providerlist) {
-                if (providerItem.equals(provider))
-                throw new Exception("The provider has a list. ");
+                for (Provider providerItem : providerlist) {
+                    if (providerItem.equals(provider))
+                        throw new Exception("The provider has a list. ");
+                }
             }
-            }
-                provider.setId_provider(++providerCounter);
-                providerlist.add(provider);
+            provider.setId_provider(++providerCounter);
+            String pass = doingPassword(provider.getId_provider (),Privileging.PROVIDER);
+            providerlist.add(provider);
+            return  pass;
 
         }
         else throw new Exception("only the CEO can add provider");
@@ -303,7 +312,7 @@ public class Databaselist implements Backend {
                 break;
             }
         }
-        invitationlist.add(new Invitation(idClient, idProvidr, idBook, count,totalPrice, delivery));
+        invitationlist.add(new Invitation(idClient, idProvidr, idBook, count, totalPrice, delivery));
         //System.out.print(invitationlist);
         /**
          * kan hishalah SMS la client odot pirte hahazmana
@@ -396,13 +405,34 @@ public class Databaselist implements Backend {
         return id;
 
     }
+    public List<String> nameBook()throws Exception {
+        List<String> nameOfBook = new ArrayList<String>();
+        String name;
+        if (booklist != null) {
+            for (Book bookItem : booklist) {
+                name = bookItem.getName() + " id:" + bookItem.getId_book();
+                nameOfBook.add(name);
+                name = "";
+            }
+            return nameOfBook;
+        }
+        throw new Exception("The list of book is ampety. ");
+    }
+
+    @Override
+    public Book returnBookFromId(long idBook) throws Exception {
+        for (Book bookItem : booklist) {
+            if (bookItem.getId_book() == idBook) {
+                return bookItem;}}
+        throw new Exception("the book not found");
+    }
 
     public void setBooklist()throws Exception{
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        Book book = new Book("Harry Potter", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
-        Book book1 = new Book("Harry Potter1", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
-        Book book2 = new Book("Harry Potter2", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
-        Book book3 = new Book("Harry Potter3", "rol", "asdfghj", df.parse("02/12/1993"), 45, 70, TypeBook.ADULTS);
+        Book book = new Book("Harry Potter", "rol", "asdfghj", "02/12/1993", 45, 70,5, TypeBook.ADULTS);
+        Book book1 = new Book("Harry Potter1", "rol", "asdfghj","02/12/1993", 45, 70,18, TypeBook.ADULTS);
+        Book book2 = new Book("Harry Potter2", "rol", "asdfghj", "02/12/1993", 45, 70,57, TypeBook.ADULTS);
+        Book book3 = new Book("Harry Potter3", "rol", "asdfghj", "02/12/1993", 45, 70,2, TypeBook.ADULTS);
         booklist.add(book);
         booklist.add(book1);
         booklist.add(book2);
@@ -413,4 +443,4 @@ public class Databaselist implements Backend {
 
 
 
-    }
+}
