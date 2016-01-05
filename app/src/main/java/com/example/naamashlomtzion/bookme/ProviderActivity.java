@@ -69,10 +69,10 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
         actionBarDrawerToggle.syncState();
         navList=(ListView)findViewById(R.id.navlist);
         ArrayList<String>navArray=new ArrayList<String>();
-        navArray.add("מחיקת ספר");
+        /*navArray.add("מחיקת ספר");
         navArray.add("הוספת ספר");
         navArray.add("עידכון ספר");
-        navArray.add("רשימת הספרים שלי");
+        navArray.add("רשימת הספרים שלי");*/
 
         NavigationView navigationView= (NavigationView)findViewById(R.id.navlist);
         navigationView.setNavigationItemSelectedListener(this);
