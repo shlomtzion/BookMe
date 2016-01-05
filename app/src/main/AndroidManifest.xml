@@ -3,14 +3,11 @@
     package="com.example.naamashlomtzion.bookme" >
 
     <uses-permission android:name="android.permission.SEND_SMS" />
+
     <uses-permissiom android:name="android.permission.INTERNET" />
-
-    <uses-permissiom android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permissiom android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permissiom android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
-
-
+    <uses-permissiom android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permissiom android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permissiom android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -38,11 +35,7 @@
             android:label="@string/title_activity_add"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity
-            android:name=".AllBookActivity"
-            android:label="@string/title_activity_all_book"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+
         <activity
             android:name=".InvitationBookActivity"
             android:label="@string/title_activity_invitation_book"
@@ -51,6 +44,11 @@
         <activity
             android:name=".ListBooksActivity"
             android:label="@string/title_activity_list_books"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".providerND"
+            android:label="@string/title_activity_provider_nd"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>

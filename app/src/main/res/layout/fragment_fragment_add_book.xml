@@ -1,0 +1,74 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.naamashlomtzion.bookme.FragmentAddBook"
+    android:background="#9d9cf3c3">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="@string/add_BookP"
+        android:gravity="start"
+
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="שם הסופר"
+        android:ems="10"
+        android:id="@+id/name_another"
+        android:layout_gravity="right|center_vertical"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="מוציא לאור"
+        android:ems="10"
+        android:id="@+id/publicion"
+        android:layout_gravity="left"/>
+
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="שם הספר"
+        android:ems="10"
+        android:id="@+id/name_book"
+        android:layout_gravity="right|top" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:text="מחיר"
+        android:ems="10"
+        android:id="@+id/price"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:text="כמות"
+        android:ems="10"
+        android:id="@+id/count"
+        android:layout_gravity="left|center_vertical"/>
+
+    <ImageButton
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:id="@+id/add_button"
+        android:layout_gravity="left|bottom"
+        android:background="@android:drawable/ic_input_add" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBarBook"
+        android:layout_gravity="right|bottom" />
+
+</FrameLayout>
