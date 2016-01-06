@@ -334,6 +334,7 @@ public class Databaselist implements Backend {
         throw new Exception("the book is not found");
     }
     public void makingStars(long idBook, int number)throws Exception{}
+
     public ArrayList<Book> Bestsellers ()throws Exception{
         return null;
     }

@@ -18,7 +18,7 @@
         android:longClickable="false"
         android:minWidth="70dp"
         android:textSize="30dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="62dp"
         android:width="500dp"
         android:height="100dp"
         android:layout_alignParentTop="true"
@@ -32,17 +32,16 @@
         android:textSize="30dp"
         android:width="500dp"
         android:height="100dp"
-        android:layout_below="@+id/bt_allBook"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/display_best_rec"
         android:id="@+id/bt_recoBook"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="64dp"
         android:textSize="30dp"
         android:width="500dp"
         android:height="100dp"
@@ -50,17 +49,4 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/your_last_book"
-        android:id="@+id/bt_lastBook"
-        android:textSize="30dp"
-        android:visibility="visible"
-        android:width="500dp"
-        android:height="100dp"
-        android:layout_below="@+id/bt_recoBook"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp" />
 </RelativeLayout>

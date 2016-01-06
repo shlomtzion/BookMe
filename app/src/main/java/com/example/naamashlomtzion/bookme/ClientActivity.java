@@ -13,28 +13,47 @@ public class ClientActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        long IDcurrentClient = (long) getIntent().getSerializableExtra("idClient");
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        try {
+        Button buttonAllBook = (Button) findViewById(R.id.bt_allBook);
+        Button buttonBestSeller = (Button) findViewById(R.id.bt_sellBook);
+        Button buttonBestRecom = (Button) findViewById(R.id.bt_recoBook);
+
+        buttonAllBook.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+
+                Intent intentAllBook = new Intent(ClientActivity.this, ListBooksActivity.class);
+                intentAllBook.putExtra("type button",1);
+                startActivity(intentAllBook);
+
             }
-        });*/
-    try {
-    Button buttonAllBook = (Button) findViewById(R.id.bt_allBook);
-    buttonAllBook.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+        });
 
-            Intent intentAllBook = new Intent(ClientActivity.this, ListBooksActivity.class);
-            startActivity(intentAllBook);
+        buttonBestSeller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        }
-    });
+                Intent intentAllBook = new Intent(ClientActivity.this, ListBooksActivity.class);
+                intentAllBook.putExtra("type button",2);
+                startActivity(intentAllBook);
+
+            }
+        });
+
+        buttonBestRecom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intentAllBook = new Intent(ClientActivity.this, ListBooksActivity.class);
+                intentAllBook.putExtra("type button",3);
+                startActivity(intentAllBook);
+
+            }
+        });
+
     }catch (Exception e) {
     Toast.makeText(getApplicationContext(),
             "SMS faild, please try again", Toast.LENGTH_LONG).show();

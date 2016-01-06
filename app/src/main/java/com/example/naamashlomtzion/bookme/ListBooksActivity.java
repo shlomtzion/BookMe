@@ -19,7 +19,6 @@ import java.util.List;
 import Model.Backend.Backend;
 import Model.Backend.BackendFactory;
 import entities.Book;
-import entities.TypeBook;
 
 public class ListBooksActivity extends Activity {
 
@@ -33,13 +32,6 @@ public class ListBooksActivity extends Activity {
 
          backend.setBooklist();
          myItemList = backend.getBookList();
-       //CharSequence date = DateFormat.format("[dd/MM/yyyy]";
-       //DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-         Book book2 = new Book("האנטומיה","גריי","tv","22/05/2013",67.9,67,0,TypeBook.ADULTS);
-       Book book = new Book("הארי פוטר", "רולינג", "asdfghj", "02/12/1993", 45.4, 70,5, TypeBook.ADULTS);
-       Book book1 = new Book("הארי פוטר 1", "רולינג", "asdfgh", "02/12/1998",42.9,70,13,TypeBook.ADULTS);
-       myItemList.add(book);
-       myItemList.add(book1);
     }
 
     void initItemByListView(int size) throws Exception {

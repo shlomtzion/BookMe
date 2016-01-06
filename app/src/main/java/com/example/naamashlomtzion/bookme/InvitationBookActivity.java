@@ -51,6 +51,34 @@ public class InvitationBookActivity extends AppCompatActivity {
             }
         });
 
+       /* Button cancel = (Button) findViewById(R.id.cancel_recommendation);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment cancel_dialog = new DialogFragment() {
+                    @NonNull
+                    @Override
+                    public Dialog onCreateDialog(Bundle savedInstanceState) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setMessage(R.string.dialog_cancel_review)
+                                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        finish();
+                                    }
+                                })
+                                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // User cancelled the dialog
+                                    }
+                                });
+                        // Create the AlertDialog object and return it
+                        return builder.create();
+                    }
+                };
+                cancel_dialog.show(getSupportFragmentManager(), "Cancel the review?");
+            }
+        });*/
+
 
 
 

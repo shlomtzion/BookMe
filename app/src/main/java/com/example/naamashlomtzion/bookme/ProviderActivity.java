@@ -1,37 +1,25 @@
 package com.example.naamashlomtzion.bookme;
 
-import android.app.ActionBar;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import  android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import Model.Backend.Backend;
 import Model.Backend.BackendFactory;
-import entities.Book;
-import entities.Book_Provider;
-import entities.Privileging;
 
 public class ProviderActivity extends ActionBarActivity implements NavigationView.OnNavigationItemSelectedListener{
     Backend backend = BackendFactory.getInstance(this);
@@ -74,8 +62,8 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
         navArray.add("עידכון ספר");
         navArray.add("רשימת הספרים שלי");*/
 
-        NavigationView navigationView= (NavigationView)findViewById(R.id.navlist);
-        navigationView.setNavigationItemSelectedListener(this);
+        //NavigationView navigationView= (NavigationView)findViewById(R.id.navlist);
+        //navigationView.setNavigationItemSelectedListener(this);
 
 
         navList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);//??
@@ -152,7 +140,7 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
         int id=item.getItemId();
             navList.setItemChecked(id, true);//?
         Fragment fragment=null;
-            switch (id){
+           /* switch (id){
                 case 0:
                     fragment=new FragmentAddBook();
                     fragmentTransaction=fragmentManager.beginTransaction();
@@ -189,13 +177,13 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
 
                     break;
                 case 1:
-                    DeleteBook fragmentDeleteBook=new DeleteBook();
+                   *//* DeleteBook fragmentDeleteBook=new DeleteBook();
                     fragmentTransaction=fragmentManager.beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putLong("id_provider", id_provider);
                     fragmentDeleteBook.setArguments(bundle);
                     fragmentTransaction.replace(R.id.fragmentholder,fragmentDeleteBook);
-                    fragmentTransaction.commit();
+                    fragmentTransaction.commit();*//*
 
                     break;
                 case 2:
@@ -213,7 +201,7 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
                     fragmentTransaction.commit();
 
                     break;
-            }
+            }*/
         drawerLayout=(DrawerLayout)findViewById(R.id.drawerlayout);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
