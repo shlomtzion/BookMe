@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -38,13 +39,6 @@ public class ListBooksActivity extends Activity {
             case 3: myItemList = backend.RecommendedBooks();
                 break;
         }
-
-        //CharSequence date = DateFormat.format("[dd/MM/yyyy]";
-        //DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-/*       Book book = new Book("׳”׳׳¨׳™ ׳₪׳•׳˜׳¨", "׳¨׳•׳׳™׳ ׳’", "asdfghj", "02/12/1993", 45.4, 70, TypeBook.ADULTS);
-       Book book1 = new Book("׳”׳׳¨׳™ ׳₪׳•׳˜׳¨ 1", "׳¨׳•׳׳™׳ ׳’", "asdfgh", "02/12/1998",42.9,70,TypeBook.ADULTS);
-       myItemList.add(book);
-       myItemList.add(book1);*/
     }
 
     void initItemByListView(int numButton, final long IDcurrentClient) throws Exception {
@@ -102,7 +96,7 @@ public class ListBooksActivity extends Activity {
                     public void onClick(View v) {
                         Intent intentInvitationBook = new Intent(ListBooksActivity.this, InvitationBookActivity.class);
                         Book book = myItemList.get(position);
-                        //Toast.makeText(getApplicationContext(), book.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), book.toString(), Toast.LENGTH_LONG).show();
                         intentInvitationBook.putExtra("book_details", book);
                         intentInvitationBook.putExtra("idClient", IDcurrentClient);
                         startActivity(intentInvitationBook);
