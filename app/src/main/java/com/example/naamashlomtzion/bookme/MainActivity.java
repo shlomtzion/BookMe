@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.Serializable;
-
 import Model.Backend.Backend;
 import Model.Backend.BackendFactory;
 import entities.Privileging;
@@ -49,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
                     id = Long.parseLong(st);
                     Toast.makeText(getApplicationContext(),st,Toast.LENGTH_LONG).show();
-                    //throw new Exception("אחד מהנתונים שגוי, נסה שוב");
-                    //backend.findClient(id, nameUser.getText().toString());
                     intentEnter = new Intent(MainActivity.this, ClientActivity.class);
                     intentEnter.putExtra("idClient", id);
                     startActivity(intentEnter);
@@ -70,20 +66,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-                //System.out.println("id: "+st.toString());
-               /* Intent intentEnter;
-
-                    id = Long.parseLong(st);
-                    Toast.makeText(getApplicationContext(),st,Toast.LENGTH_LONG).show();
-                    //throw new Exception("אחד מהנתונים שגוי, נסה שוב");
-                    //backend.findClient(id, nameUser.getText().toString());
-                    intentEnter = new Intent(MainActivity.this, ClientActivity.class);
-                    intentEnter.putExtra("idClient", (Serializable) id);
-                    startActivity(intentEnter);*/
-
                 } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), password.getText().toString() + "------" +nameUser.getText().toString(), Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "אחד הנתונים שגוי" , Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
 
