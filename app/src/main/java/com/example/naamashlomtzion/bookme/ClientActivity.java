@@ -13,7 +13,7 @@ public class ClientActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
-        long IDcurrentClient = (long) getIntent().getSerializableExtra("idClient");
+        final long IDcurrentClient = (long) getIntent().getSerializableExtra("idClient");
 
 
         try {
@@ -27,6 +27,7 @@ public class ClientActivity extends Activity {
 
                 Intent intentAllBook = new Intent(ClientActivity.this, ListBooksActivity.class);
                 intentAllBook.putExtra("type button",1);
+                intentAllBook.putExtra("idClient", IDcurrentClient);
                 startActivity(intentAllBook);
 
             }
@@ -38,6 +39,7 @@ public class ClientActivity extends Activity {
 
                 Intent intentAllBook = new Intent(ClientActivity.this, ListBooksActivity.class);
                 intentAllBook.putExtra("type button",2);
+                intentAllBook.putExtra("idClient", IDcurrentClient);
                 startActivity(intentAllBook);
 
             }
@@ -49,16 +51,17 @@ public class ClientActivity extends Activity {
 
                 Intent intentAllBook = new Intent(ClientActivity.this, ListBooksActivity.class);
                 intentAllBook.putExtra("type button",3);
+                intentAllBook.putExtra("idClient", IDcurrentClient);
                 startActivity(intentAllBook);
 
             }
         });
 
-    }catch (Exception e) {
-    Toast.makeText(getApplicationContext(),
+        }catch (Exception e) {
+        Toast.makeText(getApplicationContext(),
             "SMS faild, please try again", Toast.LENGTH_LONG).show();
-    e.printStackTrace();
-    }
+        e.printStackTrace();
+        }
 
 
     }

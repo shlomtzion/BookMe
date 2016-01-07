@@ -5,6 +5,7 @@ import android.content.Context;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import Model.Backend.Backend;
@@ -187,7 +188,7 @@ public class Databaselist implements Backend {
     private void deleteConectorbyClient(long idClient) {
         for(Client_Provider clientconecto:client_providerlist){
             if(clientconecto.getIdProvider()==idClient){
-                client_providerlist.remove( clientconecto);
+                client_providerlist.remove(clientconecto);
                 return;
             }
         }
@@ -339,7 +340,16 @@ public class Databaselist implements Backend {
         return null;
     }
     public ArrayList<Book> RecommendedBooks() throws Exception{
-        return null;
+
+        ArrayList<Book>popolarBooks=booklist;
+        if(popolarBooks!=null) {
+
+            Collections.sort(popolarBooks, new Book());
+            return popolarBooks;
+        }
+        else
+            throw new Exception("רשימת הספרים ריקה");
+
     }
 
 

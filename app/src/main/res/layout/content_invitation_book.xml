@@ -26,14 +26,14 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/count_editText"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="59dp"
+        android:hint="מספר עותקים (יש להזין מספרים בלבד)"
+        android:textSize="15dp"
         android:layout_below="@+id/nameBook_textView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:hint="מספר עותקים"
-        android:textSize="30dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/nameBook_textView"
+        android:layout_alignEnd="@+id/nameBook_textView" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
         android:layout_alignRight="@+id/count_editText"
         android:layout_alignEnd="@+id/count_editText"
         android:layout_marginTop="45dp"
-        android:textSize="30dp"
+        android:textSize="15dp"
         android:layout_alignLeft="@+id/nameBook_textView"
         android:layout_alignStart="@+id/nameBook_textView" />
 
@@ -55,8 +55,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/card_editText"
-        android:hint="מספר כרטיס אשראי"
-        android:textSize="30dp"
+        android:hint="מספר כרטיס אשראי (מספרים בלבד)"
+        android:inputType="number"
+        android:textSize="15dp"
         android:layout_marginTop="49dp"
         android:layout_below="@+id/checkBox"
         android:layout_alignRight="@+id/ID_editText"
@@ -68,8 +69,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_editText"
-        android:hint="תעודת זהות של בעל הכרטיס"
-        android:textSize="25dp"
+        android:hint="תעודת זהות של בעל הכרטיס (מספרים בלבד)"
+        android:inputType="number"
+        android:textSize="15dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/card_editText"

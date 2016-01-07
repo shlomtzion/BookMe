@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -24,18 +23,32 @@ public class ListBooksActivity extends Activity {
 
     Backend backend = BackendFactory.getInstance(this);
 
-     private List<Book> myItemList;
+    private List<Book> myItemList;
     ImageButton imageButton;
 
-     void initItemList(int size) throws Exception {
+    void initItemList(int numButton) throws Exception {
         myItemList = new ArrayList<Book>();
 
-         backend.setBooklist();
-         myItemList = backend.getBookList();
+        backend.setBooklist();
+        switch (numButton) {
+            case 1: myItemList = backend.getBookList();
+                break;
+            case 2: myItemList = backend.Bestsellers();
+                break;
+            case 3: myItemList = backend.RecommendedBooks();
+                break;
+        }
+
+        //CharSequence date = DateFormat.format("[dd/MM/yyyy]";
+        //DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+/*       Book book = new Book("׳”׳׳¨׳™ ׳₪׳•׳˜׳¨", "׳¨׳•׳׳™׳ ׳’", "asdfghj", "02/12/1993", 45.4, 70, TypeBook.ADULTS);
+       Book book1 = new Book("׳”׳׳¨׳™ ׳₪׳•׳˜׳¨ 1", "׳¨׳•׳׳™׳ ׳’", "asdfgh", "02/12/1998",42.9,70,TypeBook.ADULTS);
+       myItemList.add(book);
+       myItemList.add(book1);*/
     }
 
-    void initItemByListView(int size) throws Exception {
-        initItemList(size);
+    void initItemByListView(int numButton, final long IDcurrentClient) throws Exception {
+        initItemList(numButton);
         ListView listView = new ListView(this);
 
         ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(this,
@@ -54,7 +67,7 @@ public class ListBooksActivity extends Activity {
 
                 //image book
                 //ImageView iv = (ImageView) convertView
-                      //  .findViewById(R.id.imageBook);
+                //  .findViewById(R.id.imageBook);
 
                 //rating bar
                 RatingBar ratingBar = (RatingBar) convertView
@@ -72,16 +85,16 @@ public class ListBooksActivity extends Activity {
                 //RatingBar bar = new
                 //ImageButton
 
-                 imageButton = (ImageButton)convertView
-                .findViewById(R.id.imageButton);
+                imageButton = (ImageButton)convertView
+                        .findViewById(R.id.imageButton);
 
                 bookNameTextView.setText("שם הספר: "+myItemList.get(position).getName());
                 bookNameAuthorTextView.setText("מחבר: "+myItemList.get(position).getAuthor());
 
                 NumberFormat nm = NumberFormat.getNumberInstance();
-                bookCostTextView.setText("המחיר: " + nm.format(myItemList.get(position).getPrice()));
+                bookCostTextView.setText("מחיר הספר: " + nm.format(myItemList.get(position).getPrice()));
 
-               // iv.setImageResource(R.drawable.cake);
+                // iv.setImageResource(R.drawable.cake);
                 ratingBar.setRating(myItemList.get(position).getMakingStairs());
 
                 imageButton.setOnClickListener(new View.OnClickListener() {
@@ -89,21 +102,12 @@ public class ListBooksActivity extends Activity {
                     public void onClick(View v) {
                         Intent intentInvitationBook = new Intent(ListBooksActivity.this, InvitationBookActivity.class);
                         Book book = myItemList.get(position);
-                        Toast.makeText(getApplicationContext(), book.toString(), Toast.LENGTH_LONG).show();
-                        intentInvitationBook.putExtra("book_details",  book);
+                        //Toast.makeText(getApplicationContext(), book.toString(), Toast.LENGTH_LONG).show();
+                        intentInvitationBook.putExtra("book_details", book);
+                        intentInvitationBook.putExtra("idClient", IDcurrentClient);
                         startActivity(intentInvitationBook);
                     }
                 });
-
-
-
-
-
-                // format date to dd/MM/yyyy
-                //CharSequence date = DateFormat.format("[dd/MM/yyyy]",
-                      //  myItemList.get(position).getDate());
-
-                //productionDateTextView.setText(date);
 
                 return convertView;
             }
@@ -115,7 +119,7 @@ public class ListBooksActivity extends Activity {
         listView.setAdapter(adapter);
 
         this.setContentView(listView);
-        }
+    }
 
 
 
@@ -126,14 +130,11 @@ public class ListBooksActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
         // setContentView(R.layout.activity_main);
-
-        int size = 1000;
-
-        //initByScrollView(size);
-        //initByListView(size);
+        int numButton = (int) getIntent().getSerializableExtra("type button");
+        final long IDcurrentClient = (long) getIntent().getSerializableExtra("idClient");
 
         try {
-            initItemByListView(size);
+            initItemByListView(numButton,IDcurrentClient);
 
         } catch (Exception e) {
             e.printStackTrace();
