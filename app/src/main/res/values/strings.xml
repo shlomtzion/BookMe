@@ -23,7 +23,7 @@
     <string name="name_book">שם הספר</string>
     <string name="delete_book">מחיקת ספר</string>
     <string name="add_BookP">הוספת ספר</string>
-    <string name="updateBookP">עידכון ספר</string>
+    <string name="updateBookP">עידכון ספר</string>-->
     <string name="pref_title_sync_frequency">רשימת מעודפים</string>
     <string name="pref_title_system_sync_settings">הכנסת פרטים</string>
     <string name="pref_title_social_recommendations">רשימת הספרים הפופלארים</string>
@@ -40,6 +40,25 @@
     <string name="closedrawer">סגירה </string>
     <string name="opendrawer">פתיחה</string>
     <string name="title_activity_">Activity</string>
+    <string name="welcomeP">ברוך הבא ספק</string>
+    <string name="sign">אפשרויות:</string>
+    <string name="welcomeMainP">ברוך הבא</string>
+
+    <string-array name="nav_list">
+        <item>הוספת ספר</item>
+        <item>ממחיקת ספר</item>
+        <item>עדכון ספר</item>
+        <item>רשימת הספרים</item>
+    </string-array>
+
+<!--    <string-array name="nav_list">
+        <string name="name_book">שם הספר</string>
+        <string name="delete_book">מחיקת ספר</string>
+        <string name="add_BookP">הוספת ספר</string>
+        <string name="updateBookP">עידכון ספר</string>
+    </string-array>-->
+
+
 
 
 </resources>

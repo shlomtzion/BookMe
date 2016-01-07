@@ -59,11 +59,9 @@ public class MainActivity extends AppCompatActivity {
                     id = Long.parseLong(st);
                     Toast.makeText(getApplicationContext(),st,Toast.LENGTH_LONG).show();
                    // backend.findProvider(id,nameUser.getText().toString());
-                    intentEnterProvider = new Intent(MainActivity.this, ProviderActivity.class);
+                    intentEnterProvider = new Intent(MainActivity.this,ProviderActivity.class);
                     intentEnterProvider.putExtra("idProvider",  id);
                     startActivity(intentEnterProvider);
-
-
                 }
 
                 } catch (Exception e) {
