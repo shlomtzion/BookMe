@@ -3,44 +3,43 @@ package com.example.naamashlomtzion.bookme;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RatingBar;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import Model.Backend.Backend;
 import Model.Backend.BackendFactory;
-import entities.Book;
-import entities.Book_Provider;
-import entities.Privileging;
 
-public class ProviderActivity extends ActionBarActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ProviderActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
     Backend backend = BackendFactory.getInstance(this);
-    private ActionBarDrawerToggle actionBarDrawerToggle;
-    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
+    private DrawerLayout drawer;
     private int mNavItemId;
     private ListView navList;
     private android.support.v4.app.FragmentTransaction fragmentTransaction;
     private android.support.v4.app.FragmentManager fragmentManager;
-    //private FragmentManager fragmentManager;
     private long id_provider;
+    //private FragmentManager fragmentManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider);
+        id_provider = (long) getIntent().getSerializableExtra("idProvider");
+
         //toolBbar
-        //Toolbar toolbar=(Toolbar)findViewById(R.id.drawerlayout);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //toolbar = (Toolbar) findViewById(R.id.drawerlayout);
         //setSupportActionBar(toolbar);
         //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 /*        fab.setOnClickListener(new View.OnClickListener() {
@@ -51,16 +50,15 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
                         .setAction("Action", null).show();
             }
         });*/
-        //final long IDcurrentClient = (long) getIntent().getSerializableExtra("idClient");
-        id_provider=(long) getIntent().getSerializableExtra("id_provider");
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        drawerLayout=(DrawerLayout) findViewById(R.id.drawer_Layout);
-        actionBarDrawerToggle =new ActionBarDrawerToggle(this,drawerLayout,R.string.opendrawer,R.string.closedrawer);
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-        navList=(ListView)findViewById(R.id.navlist);
-        ArrayList<String>navArray=new ArrayList<String>();
+        drawer = (DrawerLayout) findViewById(R.id.drawer_Layout);
+        toggle = new ActionBarDrawerToggle(this, drawer,toolbar, R.string.opendrawer, R.string.closedrawer);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        //navList = (ListView) findViewById(R.id.navlist);
+        //ArrayList<String> navArray = new ArrayList<String>();
+
         /*navArray.add("׳׳—׳™׳§׳× ׳¡׳₪׳¨");
         navArray.add("׳”׳•׳¡׳₪׳× ׳¡׳₪׳¨");
         navArray.add("׳¢׳™׳“׳›׳•׳ ׳¡׳₪׳¨");
@@ -68,24 +66,20 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
 
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        NavigationView navigationView= (NavigationView)findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        navList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);//??
-        ArrayAdapter<String>adpter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_activated_1,navArray);
-        navList.setAdapter(adpter);
-        // navList.setOnItemClickListener();
+        //avList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);//??
+        //ArrayAdapter<String> adpter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, navArray);
+       // navList.setAdapter(adpter);
+        //navList.setOnItemClickListener();
 
 
-
-        android.support.v7.app.ActionBar actionBar=getSupportActionBar();
+/*        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);//true
         actionBar.setDisplayHomeAsUpEnabled(true);//true
-        fragmentManager=getSupportFragmentManager();
-
-
-
+        fragmentManager = getSupportFragmentManager();*/
 
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -96,17 +90,17 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
 
     @Override
     public void onBackPressed() {
-        drawerLayout=(DrawerLayout)findViewById(R.id.drawer_Layout);
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_Layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -128,13 +122,12 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-        else if (id==android.R.id.home){
-            if(drawerLayout.isDrawerOpen(navList)){
-                drawerLayout.closeDrawer(navList);
-            }else{
+/*        } else if (id == android.R.id.home) {
+            if (drawer.isDrawerOpen(navList)) {
+                drawer.closeDrawer(navList);
+            } else {
                 drawerLayout.openDrawer(navList);
-            }
+            }*/
         }
 
         return super.onOptionsItemSelected(item);
@@ -143,11 +136,37 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id=item.getItemId();
-        navList.setItemChecked(id, true);//?
-        Fragment fragment=null;
-        switch (id){
-            case 0:
+        int id = item.getItemId();
+        //navList.setItemChecked(id, true);//?
+        Fragment fragment = null;
+        switch (id) {
+            case R.id.add_bookP:
+                fragment = new FragmentAddBook();
+                //fragmentTransaction=fragmentManager.beginTransaction();
+                //fragmentTransaction.replace(R.id.fragmentholder, fragment);
+                //fragmentTransaction.commit();
+
+                break;
+            case R.id.delete_bookP:
+                fragment = new DeleteBook();
+                //fragment = new FindPeopleFragment();
+                break;
+            case R.id.updateBookP:
+                fragment = new upDateBook();
+                //fragmentTransaction=fragmentManager.beginTransaction();
+                Bundle bundle1 = new Bundle();
+                bundle1.putLong("id_provider", id_provider);
+                fragment.setArguments(bundle1);
+                //fragmentTransaction.replace(R.id.fragmentholder,fragment);
+                //fragmentTransaction.commit();
+                break;
+            case R.id.listBookP:
+                fragment = new ListBookOfProvider();
+                break;
+            default:
+                break;
+        }
+           /* case 0:
                 fragment=new FragmentAddBook();
                 fragmentTransaction=fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentholder,fragment);
@@ -207,15 +226,21 @@ public class ProviderActivity extends ActionBarActivity implements NavigationVie
                 fragmentTransaction.commit();
 
                 break;
+        }*/
+            if (fragment != null) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragmentholder, fragment).commit();
+            }
+            DrawerLayout layout  = (DrawerLayout) findViewById(R.id.drawer_Layout);
+            layout.closeDrawer(GravityCompat.START);
+            return true;
+
+
         }
-        drawerLayout=(DrawerLayout)findViewById(R.id.drawer_Layout);
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
 
 
-    }
 
-    ;
 }
 
 

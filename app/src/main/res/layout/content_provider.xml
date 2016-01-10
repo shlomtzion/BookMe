@@ -11,9 +11,11 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main"
-    android:id="@+id/drawerlayout"
-    android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".ProviderActivity">
+
+<!--    android:id="@+id/drawerlayout"
+    android:fitsSystemWindows="true"-->
+<!--tools:context=".MainActivity">-->
     <LinearLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
@@ -21,13 +23,13 @@
         android:orientation="vertical" >
 
     </LinearLayout>
-    <ListView
+<!--    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/navlist"
         android:background="#dedede"
         android:layout_gravity="start"
-        />-->
+        />&ndash;&gt;-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
