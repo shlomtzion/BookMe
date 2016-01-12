@@ -349,6 +349,7 @@ public class Databaselist implements Backend {
 
             Collections.sort(bestSellBooks,new Book());
             return bestSellBooks;
+
         }
         else
             throw new Exception("רשימת הספרים ריקה");
