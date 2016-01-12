@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -49,6 +50,32 @@ public class upDateBook extends Fragment /*implements AdapterView.OnItemClickLis
         View rootView=inflater.inflate(R.layout.fragment_up_date_book,container,false);
 
         Spinner spinner=(Spinner)rootView.findViewById(R.id.spinner2);
+        Button buttonUp = (Button)rootView.findViewById(R.id.bt_update);
+        EditText countBook= (EditText)rootView.findViewById(R.id.count_book);
+        EditText priceBook= (EditText)rootView.findViewById(R.id.price_book);
+
+/*        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentInvitationBook = new Intent(ListBooksActivity.this, InvitationBookActivity.class);
+                Book book = myItemList.get(position);
+                Toast.makeText(getApplicationContext(), book.toString(), Toast.LENGTH_LONG).show();
+                intentInvitationBook.putExtra("book_details", book);
+                intentInvitationBook.putExtra("idClient", IDcurrentClient);
+                startActivity(intentInvitationBook);
+            }
+        });*/
+
+        buttonUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"(:",Toast.LENGTH_LONG).show();
+            }
+
+            });
+
+
+
 
         //spinner.setOnItemClickListener();
         Bundle bundle = this.getArguments();
@@ -74,7 +101,7 @@ public class upDateBook extends Fragment /*implements AdapterView.OnItemClickLis
     }
 
 
-  //  @Override
+    //@Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String item=parent.getItemAtPosition(position).toString();
         String idBook=item.substring(item.indexOf("id:"));

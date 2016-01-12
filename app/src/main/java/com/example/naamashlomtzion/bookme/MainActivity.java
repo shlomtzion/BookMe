@@ -26,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        try {
+            backend.setBooklist();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Button buttonEnter = (Button)findViewById(R.id.bt_enter);
         buttonEnter.setOnClickListener(new View.OnClickListener() {
             @Override

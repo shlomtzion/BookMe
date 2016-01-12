@@ -325,7 +325,11 @@ public class Databaselist implements Backend {
             throw new Exception("the book is not found");
         for(Book bookItem: booklist){
             if(bookItem.getId_book()==idBooK) {
+                if(bookItem.getCount()-count<0){
+                    throw new Exception("אין מספיק במלאי");
+                }
                 bookItem.setCount(bookItem.getCount() - count);
+                bookItem.setCountSell(bookItem.getCountSell()+count);
                 double price = (bookItem.getPrice()*count);
                 if (delivery)
                     price += 30;//Delivery costs 30
@@ -337,19 +341,32 @@ public class Databaselist implements Backend {
     public void makingStars(long idBook, int number)throws Exception{}
 
     public ArrayList<Book> Bestsellers ()throws Exception{
-        return null;
+        ArrayList<Book>bestSellBooks=new ArrayList<Book>();
+        for(Book book:booklist){
+            bestSellBooks.add(book);
+        }
+        if(bestSellBooks!=null) {
+
+            Collections.sort(bestSellBooks,new Book());
+            return bestSellBooks;
+        }
+        else
+            throw new Exception("רשימת הספרים ריקה");
     }
     public ArrayList<Book> RecommendedBooks() throws Exception{
 
-        ArrayList<Book>popolarBooks=booklist;
+        ArrayList<Book>popolarBooks=new ArrayList<Book>();
         if(popolarBooks!=null) {
-
-            Collections.sort(popolarBooks, new Book());
+            for(Book book:booklist){
+                for (int i=5;i>-1;i--){
+                    if(book.getMakingStairs()==i)
+                        popolarBooks.add(book);
+                }
+            }
             return popolarBooks;
         }
         else
             throw new Exception("רשימת הספרים ריקה");
-
     }
 
 
@@ -444,7 +461,10 @@ public class Databaselist implements Backend {
         Book book1 = new Book("הארי פוטר 2", "רולינג", "asdfghj","02/12/1993", 45, 70,18, TypeBook.ADULTS);
         Book book2 = new Book("הארי פוטר 3", "רולינג", "asdfghj", "02/12/1993", 45, 70,57, TypeBook.ADULTS);
         Book book3 = new Book("הארי פוטר 4", "רולינג", "asdfghj", "02/12/1993", 45, 70,2, TypeBook.ADULTS);
-        addBook(book,Privileging.CEO);
+        book.setMakingStairs(4);
+        book3.setMakingStairs(5);
+        book2.setMakingStairs(1);
+        addBook(book, Privileging.CEO);
         addBook(book1,Privileging.CEO);
         addBook(book2,Privileging.CEO);
         addBook(book3,Privileging.CEO);

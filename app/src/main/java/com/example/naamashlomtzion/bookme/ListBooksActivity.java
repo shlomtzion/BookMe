@@ -30,7 +30,7 @@ public class ListBooksActivity extends Activity {
     void initItemList(int numButton) throws Exception {
         myItemList = new ArrayList<Book>();
 
-        backend.setBooklist();
+        //backend.setBooklist();
         switch (numButton) {
             case 1: myItemList = backend.getBookList();
                 break;

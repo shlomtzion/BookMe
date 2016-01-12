@@ -2,7 +2,6 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Comparator;
-import java.util.Date;
 
 /**
  * Created by Naama & Shlomtzion
@@ -144,14 +143,15 @@ public class Book implements Comparator<Book> ,Serializable {
     }
 
     @Override
-    public int compare(Book o1, Book o2) {
+/*    public int compare(Book o1, Book o2) {
         if (o1.getMakingStairs() > o2.getMakingStairs())
             return -1;
         else if ((o1.getMakingStairs() < o2.getMakingStairs()))
             return 1;
         else return 0;//equel
-    }
-    public int compare2(Book o1, Book o2){
+    }*/
+
+    public int compare(Book o1, Book o2){
         if (o1.getCountSell() > o2.getCountSell())
             return -1;
         else if ((o1.getCountSell() < o2.getCountSell()))

@@ -52,7 +52,12 @@ public class InvitationBookActivity extends AppCompatActivity {
                 builder.setTitle("נא אשר את פרטי ההזמנה");
                     IdBook = book.getId_book();
                     CountBook = (Integer.parseInt(countBook.getText().toString()));
-                    price = backend.toBuy(IdBook, CountBook, delivery.isChecked());
+                    try {
+                        price = backend.toBuy(IdBook, CountBook, delivery.isChecked());
+                    }catch (Exception e) {
+                        Toast.makeText(getApplicationContext(),e.getMessage() , Toast.LENGTH_LONG).show();
+                        throw e;
+                    }
                     if (delivery.isChecked()==true) {
                          deliver = "כן";
                     }
@@ -91,43 +96,13 @@ public class InvitationBookActivity extends AppCompatActivity {
                    // backend.addInvitation(IdBook, IDcurrentClient, CountBook, price, delivery.isChecked());
                    //Toast.makeText(getApplicationContext(), invitation.toString(), Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(),"נא הזן את כל הפרטים" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"נא הזן פרטים" , Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
 
 
             }
         });
-
-
-
-       /* Button cancel = (Button) findViewById(R.id.cancel_recommendation);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment cancel_dialog = new DialogFragment() {
-                    @NonNull
-                    @Override
-                    public Dialog onCreateDialog(Bundle savedInstanceState) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setMessage(R.string.dialog_cancel_review)
-                                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        finish();
-                                    }
-                                })
-                                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        // User cancelled the dialog
-                                    }
-                                });
-                        // Create the AlertDialog object and return it
-                        return builder.create();
-                    }
-                };
-                cancel_dialog.show(getSupportFragmentManager(), "Cancel the review?");
-            }
-        });*/
 
 
 
