@@ -37,7 +37,7 @@ public class Databaselist implements Backend {
     private int providerCounter=0;
 
     @Override
-    public long addBook(Book book, Privileging privileging)throws Exception{
+    public long addBook(Book book, long i, Privileging privileging)throws Exception{
         if(privileging == Privileging.CLIENT)
             throw new Exception("Client can not add a book");
         if(booklist.size()!=0) {
@@ -48,6 +48,8 @@ public class Databaselist implements Backend {
         }
         book.setId_book(++bookCounter);
         booklist.add(book);
+        Book_Provider book_provider = new Book_Provider(book.getId_book(),i);
+        addBookProvider(book_provider,Privileging.PROVIDER);
         return book.getId_book();
 
     }
@@ -374,7 +376,7 @@ public class Databaselist implements Backend {
     public void findClient(long idClient,String name) throws Exception{
         for (Client clientItem : clientlist) {
             if (clientItem.getIdClient() == idClient) {
-                if (clientItem.getName() == name)
+                if (clientItem.getName().equals(name))
                     return;
             }
         }
@@ -385,7 +387,7 @@ public class Databaselist implements Backend {
     public void findProvider(long idProvider,String name) throws Exception{
         for (Provider providerItem : providerlist) {
             if (providerItem.getId_provider() == idProvider) {
-                if (providerItem.getName() == name)
+                if (providerItem.getName().equals(name))
                     return;
             }
         }
@@ -434,12 +436,18 @@ public class Databaselist implements Backend {
         return id;
 
     }
+    public String returnIdFromName(String nameId) {
+        String id = "";
+       int x = nameId.indexOf(":");
+        id = nameId.substring(x+1, nameId.length());
+        return id;
+    }
     public List<String> nameBook()throws Exception {
         List<String> nameOfBook = new ArrayList<String>();
         String name;
         if (booklist != null) {
             for (Book bookItem : booklist) {
-                name = bookItem.getName() + " id:" + bookItem.getId_book();
+                name = bookItem.getName() + " id :" + bookItem.getId_book();
                 nameOfBook.add(name);
                 name = "";
             }
@@ -462,13 +470,15 @@ public class Databaselist implements Backend {
         Book book1 = new Book("הארי פוטר 2", "רולינג", "asdfghj","02/12/1993", 45, 70,18, TypeBook.ADULTS);
         Book book2 = new Book("הארי פוטר 3", "רולינג", "asdfghj", "02/12/1993", 45, 70,57, TypeBook.ADULTS);
         Book book3 = new Book("הארי פוטר 4", "רולינג", "asdfghj", "02/12/1993", 45, 70,2, TypeBook.ADULTS);
+        Provider provider = new Provider("דני","052","123456");
+        addProvider(provider,Privileging.CEO);
         book.setMakingStairs(4);
         book3.setMakingStairs(5);
         book2.setMakingStairs(1);
-        addBook(book, Privileging.CEO);
-        addBook(book1,Privileging.CEO);
-        addBook(book2,Privileging.CEO);
-        addBook(book3,Privileging.CEO);
+        addBook(book,1, Privileging.CEO);
+        addBook(book1, 1, Privileging.CEO);
+        addBook(book2, 1, Privileging.CEO);
+        addBook(book3, 1, Privileging.CEO);
     }
 
 

@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Model.Backend.Backend;
@@ -32,6 +31,8 @@ public class upDateBook extends Fragment /*implements AdapterView.OnItemClickLis
     //ArrayAdapter<String> adapter;
     Backend backend = BackendFactory.getInstance(getContext());
     long idProvider;
+    String[] nameBooksStrings;
+    String nameBook_id;
 
 
 
@@ -47,83 +48,72 @@ public class upDateBook extends Fragment /*implements AdapterView.OnItemClickLis
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         //super.onCreate(savedInstanceState);
-        View rootView=inflater.inflate(R.layout.fragment_up_date_book,container,false);
-
-        Spinner spinner=(Spinner)rootView.findViewById(R.id.spinner2);
-        Button buttonUp = (Button)rootView.findViewById(R.id.bt_update);
-        EditText countBook= (EditText)rootView.findViewById(R.id.count_book);
-        EditText priceBook= (EditText)rootView.findViewById(R.id.price_book);
-
-/*        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentInvitationBook = new Intent(ListBooksActivity.this, InvitationBookActivity.class);
-                Book book = myItemList.get(position);
-                Toast.makeText(getApplicationContext(), book.toString(), Toast.LENGTH_LONG).show();
-                intentInvitationBook.putExtra("book_details", book);
-                intentInvitationBook.putExtra("idClient", IDcurrentClient);
-                startActivity(intentInvitationBook);
-            }
-        });*/
-
-        buttonUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"(:",Toast.LENGTH_LONG).show();
-            }
-
-            });
-
-
-
-
-        //spinner.setOnItemClickListener();
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             idProvider = bundle.getLong("id_provider",-1);
         }
-        namebook=new ArrayList<String>();//nameOfBook
+
+        View rootView=inflater.inflate(R.layout.fragment_up_date_book,container,false);
+
+        final Spinner spinner=(Spinner)rootView.findViewById(R.id.spinner2);
+        Button buttonUp = (Button)rootView.findViewById(R.id.bt_update);
+        //EditText countBook= (EditText)rootView.findViewById(R.id.count_book);
+        //EditText priceBook= (EditText)rootView.findViewById(R.id.price_book);
+
+
+        nameBooksStrings = new String[1];
+        nameBooksStrings[0] = "הרשימה ריקה";
         try {
             namebook = backend.nameBook();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        ArrayAdapter<CharSequence>adapter;
-      // // adapter = ArrayAdapter.createFromResource(getActivity(),R.array.)
-      //  adapter = ArrayAdapter.createFromResource(getActivity(), R.array.nav_drawer_items, android.R.layout.simple_spinner_item);
-
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-      //  spinner.setAdapter(adapter);
-        return rootView;
-    }
-
-
-    //@Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String item=parent.getItemAtPosition(position).toString();
-        String idBook=item.substring(item.indexOf("id:"));
-        Toast.makeText(parent.getContext(), "הספר שנבחר:" + item, Toast.LENGTH_LONG).show();
-        Book book;
-        try {
-             book=backend.returnBookFromId(Long.parseLong(idBook));
-            //EditText dateBook= (EditText) getView().findViewById(R.id.dateOfPopolsion);
-            EditText countBook= (EditText)getView(). findViewById(R.id.count_book);
-            EditText priceBook= (EditText) getView().findViewById(R.id.price_book);
-            //book.setPublication(Date.parse(priceBook.getText().toString()));//
-            book.setCount(Integer.parseInt(priceBook.getText().toString()));//
-            book.setPrice(Double.parseDouble(priceBook.getText().toString()));
-
-            backend.updateBook(book, idProvider, Privileging.PROVIDER);
-            Toast.makeText(parent.getContext(),"הספר נמחק",Toast.LENGTH_LONG).show();
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+        nameBooksStrings = new String[namebook.size()];
+        int i = 0;
+        for (String s : namebook) {
+            nameBooksStrings[i] = s;
+            i++;
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,nameBooksStrings);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                nameBook_id = spinner.getSelectedItem().toString();
+                //Toast.makeText(getContext(), "הספר שנבחר:" + nameBook, Toast.LENGTH_LONG).show();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        buttonUp.setOnClickListener(new View.OnClickListener() {
+            Book book;
+            @Override
+            public void onClick(View v) {
+                try {
+                EditText countBook= (EditText)getView(). findViewById(R.id.count_book);
+                EditText priceBook= (EditText) getView().findViewById(R.id.price_book);
+
+                    String idBook = backend.returnIdFromName(nameBook_id);
+                    long i = Long.parseLong(idBook);
+                    book=backend.returnBookFromId(i);
+                    book.setCount(Integer.parseInt(countBook.getText().toString()));
+                    book.setPrice(Double.parseDouble(priceBook.getText().toString()));
+                    backend.updateBook(book, idProvider, Privileging.PROVIDER);
+                    Toast.makeText(getContext(), "הספר "+book.getName()+" עודכן" , Toast.LENGTH_LONG).show();
+                    startActivity(getActivity().getIntent());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "נא הזן פרטים" , Toast.LENGTH_LONG).show();
+                }
+            }
+
+        });
+
+        return rootView;
     }
 }

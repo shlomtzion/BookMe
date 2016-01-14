@@ -33,7 +33,6 @@ public class Book_Provider {
         this.idProvider = idProvider;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,10 +45,15 @@ public class Book_Provider {
 
     }
 
-    /*@Override
-    public int hashCode() {
-        int result = (int) (getIdBook() ^ (getIdBook() >>> 32));
-        result = 31 * result + (int) (getIdProvider() ^ (getIdProvider() >>> 32));
-        return result;
+    /*    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book_Provider)) return false;
+
+        Book_Provider that = (Book_Provider) o;
+
+        if (getIdBook() != that.getIdBook()) return false;
+        return getIdProvider() == that.getIdProvider();
+
     }*/
 }

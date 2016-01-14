@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.naamashlomtzion.bookme.upDateBook">
@@ -17,20 +17,27 @@
         android:ems="10"
         android:id="@+id/count_book"
         android:layout_gravity="right|center_vertical"
-        android:hint="כמות הספר"/>
+        android:hint="כמות הספר"
+        android:layout_below="@+id/price_book"
+        android:layout_alignLeft="@+id/price_book"
+        android:layout_alignStart="@+id/price_book" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="96dp"
         android:id="@+id/spinner2"
-        android:layout_gravity="right|top" />
+        android:layout_marginTop="61dp"
+        android:layout_alignParentTop="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="114dp"
         android:id="@+id/bt_update"
         android:layout_gravity="left|bottom"
-        android:background="@android:drawable/ic_menu_rotate" />
+        android:background="@android:drawable/ic_menu_rotate"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -39,6 +46,8 @@
         android:ems="10"
         android:id="@+id/price_book"
         android:layout_gravity="right|bottom"
-        android:hint="מחיר"/>
+        android:hint="מחיר"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
-</FrameLayout>
+</RelativeLayout>

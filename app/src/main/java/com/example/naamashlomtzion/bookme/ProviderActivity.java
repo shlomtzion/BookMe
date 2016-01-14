@@ -142,6 +142,9 @@ public class ProviderActivity extends AppCompatActivity
         switch (id) {
             case R.id.add_bookP:
                 fragment = new FragmentAddBook();
+                Bundle bundleAdd = new Bundle();
+                bundleAdd.putLong("id_provider", id_provider);
+                fragment.setArguments(bundleAdd);
                 //fragmentTransaction=fragmentManager.beginTransaction();
                 //fragmentTransaction.replace(R.id.fragmentholder, fragment);
                 //fragmentTransaction.commit();
@@ -149,6 +152,10 @@ public class ProviderActivity extends AppCompatActivity
                 break;
             case R.id.delete_bookP:
                 fragment = new DeleteBook();
+                Bundle bundle = new Bundle();
+                bundle.putLong("id_provider", id_provider);
+                fragment.setArguments(bundle);
+
                 //fragment = new FindPeopleFragment();
                 break;
             case R.id.updateBookP:

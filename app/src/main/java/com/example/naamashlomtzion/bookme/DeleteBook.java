@@ -23,11 +23,15 @@ import entities.Privileging;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DeleteBook extends Fragment/* implements AdapterView.OnItemClickListener */{
+public class DeleteBook extends Fragment implements AdapterView.OnItemClickListener{
    //Spinner spinner;
 
     Backend backend = BackendFactory.getInstance(getContext());
     long idProvider;
+
+    String[] nameBooksStrings;
+    String nameBook_id;
+    List<String> namebook;
 
 
 
@@ -40,80 +44,74 @@ public class DeleteBook extends Fragment/* implements AdapterView.OnItemClickLis
         super.onAttach(activity);
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
-        String item=parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(),"הספר שנבחר: "+item,Toast.LENGTH_LONG).show();
-    }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //super.onCreate(savedInstanceState);
-        View rootView=inflater.inflate(R.layout.fragment_delete_book,container,false);
-        Button button = (Button)rootView.findViewById(R.id.delete_book);
-        Spinner spinner=(Spinner)rootView.findViewById(R.id.spinner);
+        View rootView = inflater.inflate(R.layout.fragment_delete_book, container, false);
+        Button buttonDel = (Button) rootView.findViewById(R.id.delete_book);
+        final Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            idProvider = bundle.getLong("id_provider",-1);
+            idProvider = bundle.getLong("id_provider", -1);
         }
 
-
-
-
-        //List<String> namebook=new ArrayList<String>();//nameOfBook
-        String[] nameBooksStrings;
         nameBooksStrings = new String[1];
-        nameBooksStrings[0]="הרשימה ריקה";
+        nameBooksStrings[0] = "הרשימה ריקה";
         try {
-
-            List<String> namebook=backend.nameBook();
-            nameBooksStrings = new String[namebook.size()];
-            int i=0;
-            for(String s:namebook)
-            {
-                nameBooksStrings[i]=s;
-                i++;
-            }
-
-
-        }
-        catch (Exception e) {
+            namebook = backend.nameBook();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        ArrayAdapter<String>adapter;
-        //adapter=ArrayAdapter.createFromResource(getContext(),nameBooksStrings,android.R.layout.simple_spinner_item);
-        adapter= new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,nameBooksStrings);
-            //adapter = new ArrayAdapter<String>(this,R.layout.row_name_book, namebook);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        nameBooksStrings = new String[namebook.size()];
+        int i = 0;
+        for (String s : namebook) {
+            nameBooksStrings[i] = s;
+            i++;
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,nameBooksStrings);
         spinner.setAdapter(adapter);
-        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                String idBook = item.substring(item.indexOf("id:"));
-                //Toast.makeText(getContext(), "הספר שנבחר:" + item, Toast.LENGTH_LONG).show();
-                try {
-                    //backend.deleteBook(Long.parseLong(idBook),idProvider, Privileging.PROVIDER);
-                    //Toast.makeText(parent.getContext(),,Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Toast.makeText(parent.getContext(), "הספר נמחק", Toast.LENGTH_LONG).show();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                nameBook_id = spinner.getSelectedItem().toString();
+                //Toast.makeText(getContext(), "הספר שנבחר:" + nameBook, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                try {
+                    String idBook = backend.returnIdFromName(nameBook_id);
+                    long i = Long.parseLong(idBook);
+                    //Toast.makeText(getContext(),idBook, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(),idProv, Toast.LENGTH_LONG).show();
+                    backend.deleteBook(i,idProvider,Privileging.PROVIDER);
+                    Toast.makeText(getContext(),"הספר "+ nameBook_id + " נמחק" , Toast.LENGTH_LONG).show();
+                    startActivity(getActivity().getIntent());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),e.getMessage()+ " :(" , Toast.LENGTH_LONG).show();
+                }
             }
+
         });
 
+        return rootView;
 
-         return rootView;
+
+
     }
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

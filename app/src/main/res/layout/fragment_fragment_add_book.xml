@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.naamashlomtzion.bookme.FragmentAddBook"
@@ -7,27 +7,32 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView android:layout_width="match_parent" android:layout_height="match_parent"
         android:text="@string/add_BookP"
+        android:textSize="30dp"
         android:gravity="start"
-
-        />
+        android:id="@+id/textView3" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="שם הסופר"
+        android:hint="שם הסופר"
         android:ems="10"
         android:id="@+id/name_another"
-        android:layout_gravity="right|center_vertical"/>
+        android:layout_gravity="right|center_vertical"
+        android:layout_below="@+id/name_book"
+        android:layout_alignLeft="@+id/name_book"
+        android:layout_alignStart="@+id/name_book" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="מוציא לאור"
+        android:hint="מוציא לאור"
         android:ems="10"
         android:id="@+id/publicion"
-        android:layout_gravity="left"/>
+        android:layout_gravity="left"
+        android:layout_below="@+id/name_another"
+        android:layout_centerHorizontal="true" />
 
 
 
@@ -35,40 +40,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="שם הספר"
+        android:hint="שם הספר"
         android:ems="10"
         android:id="@+id/name_book"
-        android:layout_gravity="right|top" />
+        android:layout_gravity="right|top"
+        android:layout_marginTop="74dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:text="מחיר"
+        android:hint="מחיר"
         android:ems="10"
         android:id="@+id/price"
-        android:layout_gravity="center"/>
+        android:layout_below="@+id/publicion"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:text="כמות"
+        android:hint="כמות"
         android:ems="10"
         android:id="@+id/count"
-        android:layout_gravity="left|center_vertical"/>
+        android:layout_gravity="left|center_vertical"
+        android:layout_below="@+id/price"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:layout_width="95dp"
         android:layout_height="95dp"
         android:id="@+id/add_button"
         android:layout_gravity="left|bottom"
-        android:background="@android:drawable/ic_input_add" />
+        android:background="@android:drawable/ic_input_add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/count" />
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ratingBarBook"
-        android:layout_gravity="right|bottom" />
+        android:layout_gravity="right|bottom"
+        android:layout_below="@+id/count"
+        android:layout_alignRight="@+id/count"
+        android:layout_alignEnd="@+id/count" />
 
-</FrameLayout>
+</RelativeLayout>

@@ -7,6 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RatingBar;
+import android.widget.Toast;
+
+import Model.Backend.Backend;
+import Model.Backend.BackendFactory;
+import entities.Book;
+import entities.Privileging;
 
 
 /**
@@ -14,6 +23,8 @@ import android.view.ViewGroup;
  */
 public class FragmentAddBook extends Fragment {
 
+    Backend backend = BackendFactory.getInstance(getContext());
+    long idProvider;
 
     public FragmentAddBook() {
         // Required empty public constructor
@@ -32,36 +43,51 @@ public class FragmentAddBook extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView=inflater.inflate(R.layout.fragment_fragment_add_book,container,false);
 
-/*        EditText nameBook= (EditText) findViewById(R.id.name_book);
-        EditText nameAnouther= (EditText) findViewById(R.id.name_another);
-        EditText namePublicion= (EditText) findViewById(R.id.publicion);
-        //date of publicion
-        EditText priceBook= (EditText) findViewById(R.id.price);
-        EditText countBook= (EditText) findViewById(R.id.count);
-        RatingBar rating=(RatingBar)findViewById(R.id.ratingBarBook);
-        Book newBook=new Book();
-        newBook.setName(nameBook.getText().toString());
-        newBook.setAuthor(nameAnouther.getText().toString());
-        newBook.setPublisher(namePublicion.getText().toString());
-        newBook.setPrice(Double.parseDouble(priceBook.getText().toString()));
-        newBook.setCount(Integer.parseInt( countBook.getText().toString()));
-        //type of book
-        newBook.setMakingStairs(rating.getNumStars());
-        try {
-            long idBook= backend.addBook(newBook, Privileging.PROVIDER);
-            Book_Provider book_provider=new Book_Provider();
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            idProvider = bundle.getLong("id_provider",-1);
+        }
+        final View rootView=inflater.inflate(R.layout.fragment_fragment_add_book,container,false);
+            ImageButton buttonAdd = (ImageButton) rootView.findViewById(R.id.add_button);
+            final EditText nameBook = (EditText) rootView.findViewById(R.id.name_book);
+            final EditText nameAnouther = (EditText) rootView.findViewById(R.id.name_another);
+            final EditText namePublicion = (EditText) rootView.findViewById(R.id.publicion);
+            //date of publicion
+            final EditText priceBook = (EditText) rootView.findViewById(R.id.price);
+            final EditText countBook = (EditText) rootView.findViewById(R.id.count);
+            final RatingBar rating = (RatingBar) rootView.findViewById(R.id.ratingBarBook);
+
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            Book book;
+
+            @Override
+            public void onClick(View v) {
+               try{
+
+                    Book newBook = new Book();
+                    newBook.setName(nameBook.getText().toString());
+                    newBook.setAuthor(nameAnouther.getText().toString());
+                    newBook.setPublisher(namePublicion.getText().toString());
+                    newBook.setPrice(Double.parseDouble(priceBook.getText().toString()));
+                    newBook.setCount(Integer.parseInt(countBook.getText().toString()));
+                    //type of book
+                    newBook.setMakingStairs(rating.getNumStars());
+                    long idBook = backend.addBook(newBook, idProvider, Privileging.PROVIDER);
+                    Toast.makeText(getContext(), "הספר נוסף בהצלחה", Toast.LENGTH_LONG).show();
+                    startActivity(getActivity().getIntent());
+                /*Book_Provider book_provider=new Book_Provider();
             book_provider.setIdBook(idBook);
-            book_provider.setIdProvider(id_provider);
-            backend.addBookProvider(book_provider,Privileging.PROVIDER);
-
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(),
-                    "׳˜׳¢׳•׳×", Toast.LENGTH_LONG).show();
-            e.printStackTrace();}*/
+            book_provider.setIdProvider(idProvider);
+            backend.addBookProvider(book_provider,Privileging.PROVIDER);*/
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "נא הזן פרטים", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         // Inflate the layout for this fragment
         return rootView;
         //return inflater.inflate(R.layout.fragment_fragment_add_book, container, false);

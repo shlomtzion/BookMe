@@ -15,7 +15,7 @@ import entities.*;
 
 public interface Backend {
 
-    public long addBook(Book book, Privileging privileging)throws Exception;
+    public long addBook(Book book, long idProvider, Privileging privileging)throws Exception;
 
     /**
      * add provider to database. (only ceo can do it).
@@ -113,6 +113,7 @@ public interface Backend {
     public void setBooklist()throws Exception;
     public List<String> nameBook()throws Exception;
     public Book returnBookFromId(long idBook)throws Exception;
+    public String returnIdFromName(String nameId);
 
 
 }
