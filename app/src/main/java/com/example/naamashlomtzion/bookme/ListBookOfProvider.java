@@ -1,7 +1,5 @@
 package com.example.naamashlomtzion.bookme;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -35,7 +33,7 @@ public class ListBookOfProvider extends Fragment {
 
     void initItemList(int numButton) throws Exception {
         myItemList = new ArrayList<Book>();
-        myItemList = backend.getBookList();
+        myItemList = backend.listBookProvider(idProvider);
     }
 
 
@@ -60,20 +58,20 @@ public class ListBookOfProvider extends Fragment {
 
 
 
-/*    @Override
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }*/
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            idProvider = bundle.getLong("id_provider",-1);
+        }
         // Inflate the layout for this fragment
-        View rootView=inflater.inflate(R.layout.fragment_up_date_book,container,false);
+        View rootView=inflater.inflate(R.layout.fragment_list_book_of,container,false);
 
 
 
@@ -143,35 +141,18 @@ public class ListBookOfProvider extends Fragment {
 
 
     @Override
-    public void onAttach(Activity activity) {
-/*        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        //mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
     }
 
 }

@@ -111,10 +111,10 @@ public interface Backend {
     public String returnId(String password);
 
     public void setBooklist()throws Exception;
-    public List<String> nameBook()throws Exception;
+    public List<String> nameBook(long idProvider)throws Exception;
     public Book returnBookFromId(long idBook)throws Exception;
     public String returnIdFromName(String nameId);
-
+    public ArrayList<Book> listBookProvider(long idProvider)throws Exception;
 
 }
 

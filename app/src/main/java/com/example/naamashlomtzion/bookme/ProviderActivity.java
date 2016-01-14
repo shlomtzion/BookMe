@@ -152,6 +152,7 @@ public class ProviderActivity extends AppCompatActivity
                 break;
             case R.id.delete_bookP:
                 fragment = new DeleteBook();
+                //Toast.makeText(this,id_provid, Toast.LENGTH_LONG).show();
                 Bundle bundle = new Bundle();
                 bundle.putLong("id_provider", id_provider);
                 fragment.setArguments(bundle);
@@ -169,6 +170,9 @@ public class ProviderActivity extends AppCompatActivity
                 break;
             case R.id.listBookP:
                 fragment = new ListBookOfProvider();
+                Bundle bundleP = new Bundle();
+                bundleP.putLong("id_provider", id_provider);
+                fragment.setArguments(bundleP);
                 break;
             default:
                 break;

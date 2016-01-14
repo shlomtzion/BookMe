@@ -64,7 +64,7 @@ public class upDateBook extends Fragment /*implements AdapterView.OnItemClickLis
         nameBooksStrings = new String[1];
         nameBooksStrings[0] = "הרשימה ריקה";
         try {
-            namebook = backend.nameBook();
+            namebook = backend.nameBook(idProvider);
         } catch (Exception e) {
             e.printStackTrace();
         }

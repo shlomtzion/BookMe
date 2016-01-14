@@ -442,11 +442,11 @@ public class Databaselist implements Backend {
         id = nameId.substring(x+1, nameId.length());
         return id;
     }
-    public List<String> nameBook()throws Exception {
+    public List<String> nameBook(long idProvider)throws Exception {
         List<String> nameOfBook = new ArrayList<String>();
         String name;
         if (booklist != null) {
-            for (Book bookItem : booklist) {
+            for (Book bookItem : listBookProvider(idProvider)) {
                 name = bookItem.getName() + " id :" + bookItem.getId_book();
                 nameOfBook.add(name);
                 name = "";
@@ -480,6 +480,20 @@ public class Databaselist implements Backend {
         addBook(book2, 1, Privileging.CEO);
         addBook(book3, 1, Privileging.CEO);
     }
+
+    public ArrayList<Book> listBookProvider(long idProvider)throws Exception {
+        ArrayList<Book> lBP = new ArrayList<Book>();
+        for (Book_Provider book_providerItem : book_providerlist) {
+            if (book_providerItem.getIdProvider() == idProvider) {
+                lBP.add(returnBookFromId(book_providerItem.getIdBook()));
+            }
+        }
+        if (lBP.isEmpty())
+            throw new Exception("not have a book of provider ");
+
+        return lBP;
+    }
+
 
 
 

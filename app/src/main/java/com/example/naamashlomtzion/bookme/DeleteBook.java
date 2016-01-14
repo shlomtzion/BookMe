@@ -60,7 +60,7 @@ public class DeleteBook extends Fragment implements AdapterView.OnItemClickListe
         nameBooksStrings = new String[1];
         nameBooksStrings[0] = "הרשימה ריקה";
         try {
-            namebook = backend.nameBook();
+            namebook = backend.nameBook(idProvider);
         } catch (Exception e) {
             e.printStackTrace();
         }
