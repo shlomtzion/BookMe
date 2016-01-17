@@ -1,14 +1,25 @@
 package Model.dataSource;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import Model.Backend.Backend;
+import Model.Const;
 import entities.Book;
 import entities.Book_Provider;
 import entities.Client;
@@ -37,11 +48,54 @@ public class DatabaseSQL implements Backend {
     private int bookCounter=0;
     private int providerCounter=0;
 
+    private static String POST(String url, Map<String,Object> params) throws IOException {
+
+        //Convert Map<String,Object> into key=value&key=value pairs.
+        StringBuilder postData = new StringBuilder();
+        for (Map.Entry<String,Object> param : params.entrySet()) {
+            if (postData.length() != 0) postData.append('&');
+            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+            postData.append('=');
+            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+        }
+
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("POST");
+
+        // For POST only - START
+        con.setDoOutput(true);
+        OutputStream os = con.getOutputStream();
+        os.write(postData.toString().getBytes("UTF-8"));
+        os.flush();
+        os.close();
+        // For POST only - END
+
+        int responseCode = con.getResponseCode();
+        System.out.println("POST Response Code :: " + responseCode);
+
+        if (responseCode == HttpURLConnection.HTTP_OK) { //success
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            return response.toString();
+        }
+        else return "";
+    }
+
+
     @Override
-    public long addBook(Book book, long i, Privileging privileging)throws Exception{
-        if(privileging == Privileging.CLIENT)
+    public long addBook(Book book1, long i, Privileging privileging)throws Exception {
+        final Book book = book1;
+        if (privileging == Privileging.CLIENT)
             throw new Exception("Client can not add a book");
-        if(booklist.size()!=0) {
+        if (booklist.size() != 0) {
             for (Book bookItem : booklist) {
                 if (bookItem.equals(book))
                     throw new Exception("The book has a list. ");
@@ -49,15 +103,48 @@ public class DatabaseSQL implements Backend {
         }
         book.setId_book(++bookCounter);
         booklist.add(book);
-        Book_Provider book_provider = new Book_Provider(book.getId_book(),i);
-        addBookProvider(book_provider,Privileging.PROVIDER);
+        Book_Provider book_provider = new Book_Provider(book.getId_book(), i);
+        addBookProvider(book_provider, Privileging.PROVIDER);
+ /*       try {
 
+            new AsyncTask<Void, Void, Void>() {
+                @SafeVarargs
+                @Override
+                protected final Void doInBackground(Void... params) {
+                    Map<String, Object> _params = new LinkedHashMap<>();
+                    _params.put("id", book.getId_book());
+                    _params.put("name", book.getName());
+                    _params.put("author", book.getAuthor());
+                    _params.put("publisher", book.getPublisher());
+                    _params.put("publication", book.getPublication());
+                    _params.put("price", book.getPrice());
+                    _params.put("count", book.getCount());
+                    _params.put("typeBook", book.getTypeBook());
+                    _params.put("makingStairs", book.getMakingStairs());
+                    try {
+                        POST(Const.web_url + "addBook.php", _params);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+
+
+                   // return book.getId_book();
+                }
+            }.execute();
+        }
+
+        catch(Exception e)
+        {
+            e.printStackTrace();
+
+        }*/
         return book.getId_book();
 
     }
 
     @Override
-    public String addProvider(Provider provider, Privileging privileging)throws Exception{
+    public String addProvider(final Provider provider, Privileging privileging)throws Exception{
         if(privileging == Privileging.CEO) {
             if(providerlist.size()!=0)
             {
@@ -69,6 +156,35 @@ public class DatabaseSQL implements Backend {
             provider.setId_provider(++providerCounter);
             String pass = doingPassword(provider.getId_provider (),Privileging.PROVIDER);
             providerlist.add(provider);
+            try {
+
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        Map<String, Object> _params = new LinkedHashMap<>();
+                        _params.put("id", provider.getId_provider());
+                        _params.put("name",provider.getName());
+                        _params.put("phone", provider.getPhone());
+                        _params.put("address", provider.getAddress());
+                        try {
+                            POST(Const.web_url + "addProvider.php", _params);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                        return null;
+                    }
+                        // return book.getId_book();
+
+                }.execute();
+            }
+
+            catch(Exception e)
+            {
+                e.printStackTrace();
+
+            }
             return  pass;
 
         }

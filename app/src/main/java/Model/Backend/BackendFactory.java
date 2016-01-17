@@ -9,18 +9,20 @@ import android.content.Context;
 public final class BackendFactory {
 
         static Backend instance = null;
-        public static String mode = "lists";
-        public final static Backend getInstance(Context context) {
+        //public static String mode = "lists";
+        public static String mode = "sql";
+
+    public final static Backend getInstance(Context context) {
             if (mode == "lists") {
                 if (instance == null)
                     instance = new Model.dataSource.Databaselist(context);
                 return instance;
             }
-            /*if (mode == "sql") {
-                if (instance == null) instance = new Model.dataSource.DatabaseSqlite(context);
+            if (mode == "sql") {
+                if (instance == null) instance = new Model.dataSource.DatabaseSQL(context);
                 return instance;
             }
-            if (mode == "Service") {
+            /*if (mode == "Service") {
                 if (instance == null) instance = new Model.dataSource.DatabeseService();
                 return instance;
             }*/ else {

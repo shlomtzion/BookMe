@@ -26,11 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        try {
-            backend.setBooklist();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
         Button buttonEnter = (Button)findViewById(R.id.bt_enter);
         buttonEnter.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         Button buttonAdd = (Button)findViewById(R.id.bt_add);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +88,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+/*        try {
+            backend.setBooklist();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
 
 
 
