@@ -1,10 +1,9 @@
 package com.example.naamashlomtzion.bookme;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +31,7 @@ public class addActivity extends Activity {
     String name;
     String password;
     String type;
+    CheckBox ifProvider;
 
 
 
@@ -40,20 +40,12 @@ public class addActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });}
 
 
-    public void onCheckboxClicked(View view) {//check box
+/*    public void onCheckboxClicked(View view) {//check box
         boolean checked = ((CheckBox) view).isChecked();
         switch (view.getId()) {
             case R.id.checkBox:
@@ -64,49 +56,78 @@ public class addActivity extends Activity {
                     type = "c";
                 }
                 break;
-        }
+        }*/
 
 
-
+        //final CheckBox ifProvider = (CheckBox)findViewById(R.id.checkBox_wantProvider);
 
         Button buttonsignUp = (Button) findViewById(R.id.bt_sign_up);
         buttonsignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-               firstName = (EditText) findViewById(R.id.Text_firstName);
-               lastName = (EditText) findViewById(R.id.Text_lastName);
+                firstName = (EditText) findViewById(R.id.Text_firstName);
+                lastName = (EditText) findViewById(R.id.Text_lastName);
                 phone = (EditText) findViewById(R.id.TextPone);
                 address = (EditText) findViewById(R.id.Text_address);
                 email = (EditText) findViewById(R.id.Text_email);
+                ifProvider = (CheckBox)findViewById(R.id.checkBox_wantProvider);
+                if (ifProvider.isChecked())
+                    type = "p";
+                else
+                    type = "c";
 
-                if (type=="p"){
-                  name=firstName.getText().toString()+ "_"+lastName.getText().toString();
-                   Provider provider = new Provider();
-                   provider.setName(name);
-                   provider.setPhone(phone.getText().toString());
+                if (type=="p") {
+                    name = firstName.getText().toString() + "_" + lastName.getText().toString();
+                    final Provider provider = new Provider();
+                    provider.setName(name);
+                    provider.setPhone(phone.getText().toString());
                     provider.setAddress(address.getText().toString());
-                   try {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setTitle("ברוכים הבאים");
+                    try {
                         password = backend.addProvider(provider, Privileging.CEO);
-                        sendSms();
-
-                        } catch (Exception e) {
-                            Toast.makeText(getApplicationContext(),
-                                "טעות", Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
-                            }
-
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    String massage = "שם משתמש: " + name + '\n' + "הסיסמה שלך: " + password;
+                    builder.setMessage(massage);
+                    builder.setPositiveButton("אישור",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
 
-                        // Put some meat on the sandwich
                 else{
                     name=firstName.getText().toString()+ "_"+lastName.getText().toString();
-                    Client client = new Client();
+                    final Client client = new Client();
                     client.setName(name);
                     client.setPhone(phone.getText().toString());
                     client.setAddress(address.getText().toString());
                     client.setEmail(email.getText().toString());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setTitle("ברוכים הבאים");
+                    //String number = phone.getText().toString();
                     try {
+                        password = backend.addClient(client);
+                        //backend.addInvitation(IdBook, IDcurrentClient, CountBook, price, delivery.isChecked());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    String massage = firstName.getText().toString()+"שם משתמש: " + name +'\n'+ "הסיסמה שלך: "+password;
+                    builder.setMessage(massage);
+                    builder.setPositiveButton("אישור",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+/*                    try {
                         password = backend.addClient(client);
                         sendSms();
 
@@ -114,7 +135,7 @@ public class addActivity extends Activity {
                         Toast.makeText(getApplicationContext(),
                                 "טעות", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
-                    }
+                    }*/
                     }
  }
 

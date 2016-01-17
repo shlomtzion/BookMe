@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
                     id = Long.parseLong(st);
                     Toast.makeText(getApplicationContext(),st,Toast.LENGTH_LONG).show();
+                    backend.findClient(id,nameUser.getText().toString());
                     intentEnter = new Intent(MainActivity.this, ClientActivity.class);
                     intentEnter.putExtra("idClient", id);
                     startActivity(intentEnter);
@@ -63,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                     st = str.substring(1);
                     Intent intentEnterProvider;
                     id = Long.parseLong(st);
-                    Toast.makeText(getApplicationContext(),st,Toast.LENGTH_LONG).show();
-                   // backend.findProvider(id,nameUser.getText().toString());
+                    Toast.makeText(getApplicationContext(), st, Toast.LENGTH_LONG).show();
+                    backend.findProvider(id,nameUser.getText().toString());
                     intentEnterProvider = new Intent(MainActivity.this,ProviderActivity.class);
                     intentEnterProvider.putExtra("idProvider",  id);
                     startActivity(intentEnterProvider);

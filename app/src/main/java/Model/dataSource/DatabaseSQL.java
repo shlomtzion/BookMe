@@ -19,13 +19,14 @@ import entities.Provider;
 import entities.TypeBook;
 
 /**
- * Created by UserWin on 12/11/2015.
+ * Created by shlomtzy on 17/01/2016.
  */
-public class Databaselist implements Backend {
-    private Context context;
-    public  Databaselist(Context current){this.context=current;}
+public class DatabaseSQL implements Backend {
 
-    private ArrayList<Book>booklist = new ArrayList<Book>();
+    private Context context;
+    public  DatabaseSQL(Context current){this.context=current;}
+
+    private ArrayList<Book> booklist = new ArrayList<Book>();
     private ArrayList<Client>clientlist = new ArrayList<Client>();
     private ArrayList<Provider>providerlist = new ArrayList<Provider>();
     private ArrayList<Client_Provider>client_providerlist = new ArrayList<Client_Provider>();
@@ -50,6 +51,7 @@ public class Databaselist implements Backend {
         booklist.add(book);
         Book_Provider book_provider = new Book_Provider(book.getId_book(),i);
         addBookProvider(book_provider,Privileging.PROVIDER);
+
         return book.getId_book();
 
     }
@@ -80,8 +82,8 @@ public class Databaselist implements Backend {
             for (Client clientItem : clientlist) {
                 if (clientItem.equals(client))
                     throw new Exception("The client has a list.");
-                }
             }
+        }
         client.setIdClient(++clientCounter);
         String pass = doingPassword(client.getIdClient(),Privileging.CLIENT);
         clientlist.add(client);
@@ -257,7 +259,7 @@ public class Databaselist implements Backend {
         if(book_providerlist.size()!=0) {
             for (Book_Provider bPItem : book_providerlist) {
                 if (bPItem.equals(book_provider)!=false)
-                throw new Exception("The book has a list of the provider. ");
+                    throw new Exception("The book has a list of the provider. ");
             }
         }
         book_providerlist.add(book_provider);
@@ -270,10 +272,10 @@ public class Databaselist implements Backend {
         if(client_providerlist.size()!=0) {
             for (Client_Provider cPItem : client_providerlist) {
                 if (cPItem.equals(client_provider))
-                throw new Exception("The client has a list. ") ;
+                    throw new Exception("The client has a list. ") ;
             }
         }
-            client_providerlist.add(client_provider);
+        client_providerlist.add(client_provider);
 
 
     }
@@ -289,7 +291,7 @@ public class Databaselist implements Backend {
 
     @Override
     public ArrayList<Client>getClientList(Privileging privileging) throws Exception {
-       if(clientlist.size()!=0)
+        if(clientlist.size()!=0)
             return clientlist;
         else throw new Exception("The clients list is empty");
     }
@@ -299,7 +301,7 @@ public class Databaselist implements Backend {
     @Override
     public ArrayList<Provider>getProviderList(Privileging privileging) throws Exception {
         if(privileging != Privileging.CEO)
-           throw new Exception("Only the CEO can get a list of the providers");
+            throw new Exception("Only the CEO can get a list of the providers");
         if(providerlist.size()!=0)
             return providerlist;
         else throw new Exception("The providers list is empty");
@@ -307,7 +309,7 @@ public class Databaselist implements Backend {
     public void addInvitation(long idBook, long idClient, int count,double totalPrice, boolean delivery)throws Exception{
         //toBuy(idBook,count,delivery,double );
         //if(delivery)
-           // price=price+30;//Delivery costs 30
+        // price=price+30;//Delivery costs 30
         long idProvidr = 0;
         for (Book_Provider bookProvider: book_providerlist){
             if(bookProvider.getIdBook()==idBook){
@@ -349,7 +351,7 @@ public class Databaselist implements Backend {
         }
         if(bestSellBooks!=null) {
 
-            Collections.sort(bestSellBooks,new Book());
+            Collections.sort(bestSellBooks, new Book());
             return bestSellBooks;
 
         }
@@ -438,7 +440,7 @@ public class Databaselist implements Backend {
     }
     public String returnIdFromName(String nameId) {
         String id = "";
-       int x = nameId.indexOf(":");
+        int x = nameId.indexOf(":");
         id = nameId.substring(x+1, nameId.length());
         return id;
     }

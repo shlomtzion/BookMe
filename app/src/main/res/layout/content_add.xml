@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="@string/firstName"
+        android:hint="@string/firstName"
         android:ems="10"
         android:id="@+id/Text_firstName"
         android:layout_alignParentTop="true"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="@string/lastName"
+        android:hint="@string/lastName"
         android:ems="10"
         android:id="@+id/Text_lastName"
         android:layout_below="@+id/Text_firstName"
@@ -33,7 +33,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/phone"
+        android:hint="@string/phone"
         android:inputType="phone"
         android:ems="10"
         android:id="@+id/TextPone"
@@ -43,7 +43,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/address"
+        android:hint="@string/address"
         android:inputType="textPostalAddress"
         android:ems="10"
         android:id="@+id/Text_address"
@@ -53,7 +53,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/Text_email"
@@ -64,14 +64,12 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New CheckBox"
+        android:text="מעוניין להיות ספק?"
         android:id="@+id/checkBox_wantProvider"
         android:layout_marginTop="51dp"
         android:layout_below="@+id/Text_email"
         android:layout_alignLeft="@+id/Text_email"
-        android:layout_alignStart="@+id/Text_email"
-        android:onClick="onCheckboxClicked"/>
-        android:checked="false" />
+        android:layout_alignStart="@+id/Text_email"/>sd
 
     <Button
         android:layout_width="wrap_content"
